@@ -34,8 +34,9 @@ const LinkMatchView = () => {
         <Header />
       </div>
 
-      <div className=" bg-slate-100 flex-1 flex flex-row">
-        <div className="container mx-auto grid gap-4 grid-cols-2 grid-rows-1">
+      <div className=" bg-slate-100 flex-1 flex flex-col">
+        <div className="h-20 text-center">Hello!</div>
+        <div className="container mx-auto grid gap-4 grid-cols-2 grid-rows-1 flex-1">
           <JobView />
           <CandidateView />
         </div>
