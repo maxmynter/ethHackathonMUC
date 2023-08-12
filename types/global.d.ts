@@ -20,7 +20,8 @@ interface JobPosting {
   id: number;
   title: string;
   companyName: string;
-  suggestions: number;
-  backedTokens: number;
-  backedByN: number;
+  suggestions?: number;
+  backedTokens?: number;
+  backedByN?: number;
+  searchQuery?: string;
 }

@@ -35,8 +35,20 @@ const jobPostings: ExpandedJobPosting[] = [
   {
     id: 1,
     title: "Software Engineer",
+    companyName: "Google",
     suggestions: 5,
     backedTokens: 3.22,
+    searchQuery: `About Us:
+We are a dynamic and innovative [Company Name] seeking a skilled Software Engineer to join our talented tech team. Our company is dedicated to pushing the boundaries of technology, creating cutting-edge solutions that make a real impact in various industries.
+
+Role Overview:
+As a Software Engineer at [Company Name], you'll play a crucial role in designing, developing, and implementing software solutions that power our products and services. You'll collaborate closely with cross-functional teams to deliver high-quality code, solve complex technical challenges, and contribute to the continuous improvement of our technology stack.
+
+Responsibilities:
+
+    Design, code, and test software applications that meet user needs and business requirements.
+    Collaborate with product managers, designers, and other developers to create innovative solutions.
+    Debug and troubleshoot issues, optimize code, and ensure the scalability of applications.`,
     bountyUSD: 5000,
     candidates: [candidatesByID.johnDoe, candidatesByID.janeSmith],
   },
