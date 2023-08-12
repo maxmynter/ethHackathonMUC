@@ -58,7 +58,7 @@ contract Offer is IOffer, Ownable {
         require(factory.deployerOfApplicant(applicant) != address(0), "Applicant is not registered with the factory");
         require(!(matchDataOf[applicant].applicantAck && matchDataOf[applicant].posterAck), "Can't bet on applicants who where already selected for the offer");
         require(minShares > 0, "minShares cannot be zero");
-        uint256 shares = calculateShares(matchDataOf[applicant], msg.value);
+        uint256 shares = calculateShares(matchDataOf[applicant].totalShares, matchDataOf[applicant].etherValue, msg.value);
         require(shares >= minShares, "Slippage control");
         if (matchDataOf[applicant].totalShares == 0) {
             proposed.push(applicant);
@@ -73,10 +73,22 @@ contract Offer is IOffer, Ownable {
         require(res);
     }
 
-    function calculateShares(MatchData memory matchData, uint256 etherIn) public view returns (uint256 shares) {
+    function calculateShares(uint256 totalShares, uint256 totalEther, uint256 etherIn) public view returns (uint256 shares) {
         // TODO: Come up with a nicer formula
-        shares = ((MAX_SHARES - matchData.totalShares) * etherIn) / (INITIAL_X + matchData.etherValue + etherIn);
+        shares = ((MAX_SHARES - totalShares) * etherIn) / (INITIAL_X + totalEther + etherIn);
     }
+
+    function totalSharesOf(address applicant) external view returns (uint256 totalShares) {
+        totalShares = matchDataOf[applicant].totalShares;
+    }
+
+    function etherValueOf(address applicant) external view returns (uint256 etherValue) {
+        etherValue = matchDataOf[applicant].etherValue;
+    }
+    function sharesOwnedOf(address matchmaker, address applicant) external view returns (uint256 shares) {
+        shares = bets[matchmaker][applicant];
+    }
+
 
     function selectApplicant(address applicant) onlyOwner _isOpen public {
         require(factory.deployerOfApplicant(applicant) != address(0), "Applicant isn't registered");

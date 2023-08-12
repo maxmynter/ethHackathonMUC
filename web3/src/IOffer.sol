@@ -9,10 +9,14 @@ interface IOffer {
         uint256 etherValue;
     }
 
-    //function matchDataOf(address applicant) external view returns (MatchData);
-    //function bets(address matchmaker) external view returns (Match memory);
+    function totalSharesOf(address applicant) external view returns (uint256 totalShares);
+    function etherValueOf(address applicant) external view returns (uint256 etherValue);
+    function sharesOwnedOf(address matchmaker, address applicant) external view returns (uint256 shares);
     function buyShares(address applicant, uint256 shares) payable external;
-    function calculateShares(MatchData memory matchData, uint256 etherIn) external view returns (uint256 shares);
+    function calculateShares(uint256 totalShares, uint256 totalEther, uint256 etherIn) external view returns (uint256 shares);
     function reclaimBounty(address payable receiver) external;
+    function selectApplicant(address applicant) external;
+    function acceptOffer(address applicant) external;
+    function claimBounty(address payable receiver, address applicant) external;
     function isClosed() external view returns (bool);
 }
