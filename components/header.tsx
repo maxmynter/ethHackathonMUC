@@ -2,6 +2,8 @@ import Link from "next/link";
 import { HeaderButtonObject } from "../types/global";
 import React from "react";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const toIndex: HeaderButtonObject = {
   text: "Home",
@@ -39,12 +41,22 @@ const HeaderButton = ({ buttonInfo }: { buttonInfo: HeaderButtonObject }) => {
 
 const Header = () => {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center mt-10">
+      <Image
+        src="./linkedup.svg"
+        width={200}
+        height={300}
+        alt="LinkedUp"
+        className="margin-0"
+      />
+
       <div className="flex flex-row p-1 justify-between">
         {allButtons.map((buttonInfo) => (
           <HeaderButton key={buttonInfo.linkTo} buttonInfo={buttonInfo} />
         ))}
       </div>
+
+      <ConnectButton />
     </div>
   );
 };
