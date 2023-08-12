@@ -9,15 +9,15 @@ const toIndex: HeaderButtonObject = {
   linkTo: "/",
 };
 const toCompany: HeaderButtonObject = {
-  text: "Search Candidates",
+  text: "🔍 Search Candidates",
   linkTo: "/company",
 };
 const toMatchmaking: HeaderButtonObject = {
-  text: "Matchmake!",
+  text: "💫 Matchmake!",
   linkTo: "/linkmatch",
 };
 const toApply: HeaderButtonObject = {
-  text: "Apply for Jobs",
+  text: "😬 I want a new job!",
   linkTo: "/applicant",
 };
 
