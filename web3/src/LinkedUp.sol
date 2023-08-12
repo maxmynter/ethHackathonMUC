@@ -3,6 +3,8 @@ pragma solidity ^0.8.13;
 
 import "./ILinkedUp.sol";
 import "./IOffer.sol";
+import "./Offer.sol";
+import "./Applicant.sol";
 import "openzeppelin-contracts/contracts/access/Ownable.sol";
 
 contract LinkedUp is ILinkedUp, Ownable {
@@ -10,8 +12,11 @@ contract LinkedUp is ILinkedUp, Ownable {
     address payable public VAULT;  // the address to which match proposal fees are sent to
     uint256 public MIN_MATCH_PROPOSAL_FEE;  // the minimum amount matchmakers have to put at stake when proposing matches
     uint256 public MIN_OFFER_BOUNTY;  // the minimum amount needed to be offered as a bounty for successful matches
+    uint256 public MIN_DURATION = 1 hours;
+    uint256 public MAX_DURATION = 365 days;
 
     mapping(address => address) public ownerOfApplicant;  // Returns the address owning the applicant smart contract with the specified address
+    address[] public offers;  // TODO: Come up with a better way of storing offers
 
     constructor (address payable _vault, uint256 _proposalFee, uint256 _bounty) {
         VAULT = _vault;
@@ -20,6 +25,22 @@ contract LinkedUp is ILinkedUp, Ownable {
         emit MinimumMatchProposalFeeChanged(0, _proposalFee, owner());
         MIN_OFFER_BOUNTY = _bounty;
         emit MinimumOfferBountyChanged(0, _bounty, owner());
+    }
+
+    function createApplicantProfile() public returns (address) {
+        Applicant applicant = new Applicant();
+        applicant.transferOwnership(msg.sender);
+        ownerOfApplicant[address(applicant)] = msg.sender;
+        return address(applicant);
+    }
+
+    function createOffer(bytes32 _data, uint256 _bounty, uint256 _minBet, uint16 _nWinners, uint256 _duration) public returns (address) {
+        require(_duration >= MIN_DURATION && _duration <= MAX_DURATION, "Duration is out of bounds");
+        // The rest of the parameters are validated in Offer.sol
+        Offer offer = new Offer(address(this), _data, _bounty, _minBet, _nWinners, block.timestamp + _duration);
+        offer.transferOwnership(msg.sender);
+        offers.push(address(offer));
+        return address(offer);
     }
 
     function changeVaultAddress(address payable _vault) onlyOwner public {
