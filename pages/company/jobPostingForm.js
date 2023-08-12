@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { USD_TO_ETH } from "../../utils/usdToEth";
 
 const JobPostingForm = () => {
   const [usdAmount, setUsdAmount] = useState("");
   const [ethAmount, setEthAmount] = useState("");
 
-  const usdToEthConversionRate = 0.00054;
+  const usdToEthConversionRate = USD_TO_ETH;
 
   const handleUsdChange = (event) => {
     const newUsdAmount = event.target.value;
