@@ -14,6 +14,9 @@ interface ILinkedUp {
     function MAX_DURATION() external view returns (uint256);
     
     function deployerOfApplicant(address applicant) external view returns (address);
+    function offers(uint256 index) external view returns (address);
+
+    function numberOfOffers() external view returns (uint256);
 
     function createApplicantProfile() external returns (address);
     function createApplicantProfileWithData(bytes32[] calldata _data) external returns (address);

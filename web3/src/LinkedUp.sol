@@ -18,6 +18,7 @@ contract LinkedUp is ILinkedUp, Ownable {
     mapping(address => address) public deployerOfApplicant;  // Returns the address owning the applicant smart contract with the specified address
     address[] public offers;  // TODO: Come up with a better way of storing offers
     mapping(address => uint256[]) offersOf;
+
     constructor (address payable _vault, uint256 _proposalFee, uint256 _bounty) {
         VAULT = _vault;
         emit VaultChanged(address(0), _vault, owner());
@@ -38,6 +39,10 @@ contract LinkedUp is ILinkedUp, Ownable {
         IApplicant applicant = IApplicant(createApplicantProfile());
         applicant.addData(_data);
         return address(applicant);
+    }
+
+    function numberOfOffers() external view returns (uint256) {
+        return offers.length;
     }
 
     function createOffer(bytes32 _data, uint256 _bounty, uint256 _minBet, uint16 _nWinners, uint256 _duration) public returns (address) {
