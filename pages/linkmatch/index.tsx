@@ -1,9 +1,17 @@
+import React, { Dispatch, SetStateAction, useState } from "react";
 import Header from "../../components/header/header";
 import mockData from "../../utils/mockData";
+import { Candidate, ExpandedJobPosting } from "../../types/global";
 
 import JobView from "./JobView";
 
-const CandidateView = () => {
+const CandidateView = ({
+  selectedCandidate,
+  setSelectedCandidate,
+}: {
+  selectedCandidate: Candidate | null;
+  setSelectedCandidate: Dispatch<SetStateAction<Candidate | null>>;
+}) => {
   const candidates = mockData.candidates;
 
   return (
@@ -22,17 +30,27 @@ const CandidateView = () => {
 };
 
 const LinkMatchView = () => {
+  const [selectedJob, setSelectedJob] = useState<ExpandedJobPosting | null>(
+    null
+  );
+
+  const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(
+    null
+  );
+
   return (
     <div className="flex flex-col h-full">
       <div>
         <Header />
       </div>
 
-      <div className=" bg-slate-100 flex-1 flex flex-col">
-        <div className="h-20 text-center">Hello!</div>
+      <div className="flex-1 flex flex-col">
         <div className="container mx-auto grid gap-4 grid-cols-2 grid-rows-1 flex-1">
-          <JobView />
-          <CandidateView />
+          <JobView selectedJob={selectedJob} setSelectedJob={setSelectedJob} />
+          <CandidateView
+            selectedCandidate={selectedCandidate}
+            setSelectedCandidate={setSelectedCandidate}
+          />
         </div>
       </div>
     </div>
