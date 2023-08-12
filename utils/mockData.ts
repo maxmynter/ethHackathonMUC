@@ -1,8 +1,6 @@
-// max, I've copied this to /mockData.ts now so you can import it from there
+import { Candidate, ExpandedJobPosting } from "../types/global";
 
-import { ExpandedJobPosting } from "../../types/global";
-
-const mockJobPostings: ExpandedJobPosting[] = [
+const jobPostings: ExpandedJobPosting[] = [
   {
     id: 1,
     title: "Software Engineer",
@@ -50,4 +48,12 @@ const mockJobPostings: ExpandedJobPosting[] = [
     ],
   },
 ];
-export default mockJobPostings;
+
+const candidates: Candidate[] = [];
+jobPostings.forEach((job) => {
+  job.candidates.forEach((candidate) => {
+    candidates.push(candidate);
+  });
+});
+
+export default { jobPostings, candidates };
