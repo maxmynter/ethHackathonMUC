@@ -3,6 +3,7 @@ import React from "react";
 import HeaderButton from "./headerButton";
 import Image from "next/image";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import Link from "next/link";
 
 const toIndex: HeaderButtonObject = {
   text: "Home",
@@ -34,14 +35,14 @@ const Header = ({
     <div className="pl-2 pr-2 mx-auto py-2 w-full  flex flex-col justify-between bg-stone-200">
       <div className="flex flex-row justify-center w-full h-12">
         <div>
-          <a href="/">
+          <Link href="/">
             <Image
               src="./linkedup.svg"
               width={150}
               height={80}
               alt="LinkedUp"
             />
-          </a>
+          </Link>
         </div>
 
         <div className="flex ml-12 mr-12 flex-row border-l-2 border-r-2 border-gray-400 flex-1 text-center  justify-between mx-auto px-20">
