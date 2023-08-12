@@ -48,6 +48,14 @@ const jobPostings: ExpandedJobPosting[] = [
     bountyUSD: 3000,
     candidates: [candidatesByID.aliceJohnson, candidatesByID.bobWilliams],
   },
+  {
+    id: 3,
+    title: "Risk Analyst",
+    suggestions: 5,
+    backedTokens: 1.17,
+    bountyUSD: 4200,
+    candidates: [candidatesByID.aliceJohnson, candidatesByID.bobWilliams],
+  },
 ];
 
 const candidates: Candidate[] = Object.values(candidatesByID);

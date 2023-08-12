@@ -9,15 +9,15 @@ const toIndex: HeaderButtonObject = {
   linkTo: "/",
 };
 const toCompany: HeaderButtonObject = {
-  text: "Search Candidates",
+  text: "🔍 Search Candidates",
   linkTo: "/company",
 };
 const toMatchmaking: HeaderButtonObject = {
-  text: "Matchmake!",
+  text: "💫 Matchmake!",
   linkTo: "/linkmatch",
 };
 const toApply: HeaderButtonObject = {
-  text: "Apply for Jobs",
+  text: "😬 I want a new job!",
   linkTo: "/applicant",
 };
 
@@ -31,13 +31,13 @@ const Header = ({
   size?: number;
 }) => {
   return (
-    <div className="container mx-auto h-20 flex flex-col justify-center">
+    <div className="container mx-auto mt-2 h-20 flex flex-col justify-between">
       <div className="flex flex-row justify-center w-full h-12">
         <div>
           <Image src="./linkedup.svg" width={150} height={80} alt="LinkedUp" />
         </div>
 
-        <div className="flex flex-row p-2 flex-1 text-center mx-auto px-10">
+        <div className="flex flex-row p-2 flex-1 text-center  justify-between mx-auto px-10">
           {buttonArray.map((buttonInfo) => (
             <HeaderButton
               key={buttonInfo.linkTo}
