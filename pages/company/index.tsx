@@ -1,5 +1,6 @@
 import Header from "../../components/header";
 import SubHeader from "../../components/subheader";
+import ActiveJobPostings from "./ListActivePostings";
 import JobPostingForm from "./jobPostingForm";
 import { useState } from "react";
 
@@ -23,7 +24,7 @@ const CompanyView = () => {
       case "New":
         return <JobPostingForm />;
       case "Active":
-        return <p>Not yet Implemented</p>;
+        return <ActiveJobPostings />;
       case "Archive":
         return <p>Not yet Implemented</p>;
       default:
