@@ -3,7 +3,10 @@
 @tailwind utilities;
 
 html,
-body,
+body {
+  background-color: #fafaf9;
+}
+
 body > div:first-child,
 div#__next,
 div#__next > div {

@@ -21,7 +21,6 @@ const HeroBox = ({
 }) => {
   return (
     <Link href={linkTo}>
-      {}
       <div
         className={`w-72 h-72 ${colorUnderlay} rounded-xl drop-shadow-xl p-8 flex flex-col justify-center items-center m-10 hover:scale-105 transform transition-transform`}
       >
@@ -41,12 +40,12 @@ const HeroBox = ({
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <div className="flex min-h-screen  w-full">
       <Head>
         <title>LinkedUp</title>
         <link href="/favicon.ico" rel="icon" />
       </Head>
-      <main className="text-center h-full">
+      <main className="w-screen">
         <Header />
         <div className="h-full flex flex-col align-middle pt-11">
           <div className="flex flex-row justify-center items-center p-7">
