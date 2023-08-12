@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { USD_TO_ETH } from "../../utils/usdToEth";
-import mockJobPostings from "./jobPostingsMockData";
 import { Candidate, ExpandedJobPosting } from "../../types/global";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import mockData from "../../utils/mockData";
+
+const mockJobPostings = mockData.jobPostings;
 
 const ExpandCollapseToggle = ({
   isExpanded,
