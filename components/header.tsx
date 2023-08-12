@@ -31,26 +31,26 @@ const Header = ({
   size?: number;
 }) => {
   return (
-    <div className="flex justify-center mt-10">
-      <Image
-        src="./linkedup.svg"
-        width={200}
-        height={300}
-        alt="LinkedUp"
-        className="margin-0"
-      />
+    <div className="container mx-auto">
+      <div className="flex flex-row justify-center mt-10  w-full h-12">
+        <div>
+          <Image src="./linkedup.svg" width={200} height={140} alt="LinkedUp" />
+        </div>
 
-      <div className="flex flex-row p-1 justify-between">
-        {buttonArray.map((buttonInfo) => (
-          <HeaderButton
-            key={buttonInfo.linkTo}
-            buttonInfo={buttonInfo}
-            size={String(size)}
-          />
-        ))}
+        <div className="flex flex-row p-1 flex-1 text-center mx-auto px-10">
+          {buttonArray.map((buttonInfo) => (
+            <HeaderButton
+              key={buttonInfo.linkTo}
+              buttonInfo={buttonInfo}
+              size={String(size)}
+            />
+          ))}
+        </div>
+
+        <div className="text-right">
+          <ConnectButton />
+        </div>
       </div>
-
-      <ConnectButton />
     </div>
   );
 };

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 2594 800" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-    <g id="Background" transform="matrix(1,0,0,1,-1278,0)">
+<svg width="100%" height="100%" viewBox="0 0 2535 800" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="Background" transform="matrix(1,0,0,1,-1337,0)">
         <use xlink:href="#_Image1" x="3072" y="1" width="800px" height="798px"/>
     </g>
-    <g id="Background1" serif:id="Background" transform="matrix(1,0,0,1,-1174,-256)">
+    <g id="Background1" serif:id="Background" transform="matrix(1,0,0,1,-1233,-256)">
         <use xlink:href="#_Image2" x="3069" y="420" width="109px" height="98px"/>
     </g>
-    <g id="Background2" serif:id="Background" transform="matrix(1,0,0,1,-1278,-256)">
+    <g id="Background2" serif:id="Background" transform="matrix(1,0,0,1,-1337,-256)">
         <use xlink:href="#_Image2" x="3325" y="420" width="109px" height="98px"/>
     </g>
-    <g transform="matrix(39.8945,0,0,39.8945,-846.71,-14923.2)">
+    <g transform="matrix(39.8945,0,0,39.8945,-905.71,-14923.2)">
         <text x="68.077px" y="387.66px" style="font-family:'Arial-Black', 'Arial Black', sans-serif;font-weight:900;font-size:12px;fill:white;">up</text>
     </g>
-    <g transform="matrix(1.0327,0,0,1.08019,-406.43,4.58999)">
+    <g transform="matrix(1.0327,0,0,1.08019,-465.43,4.58999)">
         <text x="430.66px" y="497.773px" style="font-family:'GillSans-Bold', 'Gill Sans', sans-serif;font-weight:700;font-size:478.735px;fill:rgb(2,116,179);">Linked</text>
     </g>
     <defs>
