@@ -33,7 +33,7 @@ const SubHeader = ({
   setHeaderState: Dispatch<SetStateAction<string>>;
 }) => {
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex justify-center pb-2 bg-stone-200">
       <div className="w-64 justify-between">
         <div className="flex flex-row justify-between">
           {statesArray.map((stte) => {
