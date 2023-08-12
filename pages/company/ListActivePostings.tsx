@@ -62,22 +62,26 @@ const CandidateScores = ({
 
 const DisplayCandidate = ({ candidate }: { candidate: Candidate }) => {
   return (
-    <li key={candidate.id} className="mb-3">
-      <div className="flex flex-row items-center">
-        <input type="checkbox" className="mr-2" />
+    <li key={candidate.id} className="mb-3 p-2 border-b border-gray-400 flex ">
+      <div className="flex flex-row items-center w-full justify-between">
+        <div className="flex flex-row items-center">
+          <input type="checkbox" className="mr-2" />
+          <h2 className="font-bold text-black pl-2 pr-2">{candidate.name}</h2>
+
+          <CandidateScores
+            backedAmount={candidate.backedAmount}
+            backersCount={candidate.backersCount}
+          />
+        </div>
         <a href={candidate.portfolioLink} className="text-blue-500 pl-2 pr-2">
-          {candidate.name}
+          To Portfolio
         </a>
-        <CandidateScores
-          backedAmount={candidate.backedAmount}
-          backersCount={candidate.backersCount}
-        />
       </div>
     </li>
   );
 };
 
-const JobListItemContent = ({
+const JobListItemAbstract = ({
   jobPosting,
   expandedJobId,
   handleJobClick,
@@ -129,7 +133,22 @@ const EndSearchButton = ({
   );
 };
 
-const JobListItemDetailContent = ({
+const DetailViewHeader = ({
+  jobPosting,
+}: {
+  jobPosting: ExpandedJobPosting;
+}) => {
+  return (
+    <div className="flex flex-row w-full justify-between">
+      <h3 className="text-md font-medium mb-2">Candidates:</h3>
+
+      <h3 className="text-md font-medium mb-2">
+        Your Bounty: {jobPosting.bountyUSD.toFixed(2)} (USD)
+      </h3>
+    </div>
+  );
+};
+const JobListItemDetailView = ({
   jobPosting,
   onSelectAndCloseSearch,
 }: {
@@ -138,11 +157,8 @@ const JobListItemDetailContent = ({
 }) => {
   return (
     <div className="mt-4">
-      <h2 className="text-lg font-semibold mb-2">
-        Your Bounty: ${jobPosting.bountyUSD.toFixed(2)} (USD)
-      </h2>
-      <h3 className="text-md font-medium mb-2">Candidates:</h3>
-      <ul>
+      <DetailViewHeader jobPosting={jobPosting} />
+      <ul className="">
         {jobPosting.candidates.map((candidate) => (
           <DisplayCandidate key={candidate.id} candidate={candidate} />
         ))}
@@ -187,13 +203,13 @@ const ActiveJobPostings = () => {
               }
             }}
           >
-            <JobListItemContent
+            <JobListItemAbstract
               jobPosting={jobPosting}
               expandedJobId={expandedJobId}
               handleJobClick={handleJobClick}
             />
             {expandedJobId === jobPosting.id && (
-              <JobListItemDetailContent
+              <JobListItemDetailView
                 jobPosting={jobPosting}
                 onSelectAndCloseSearch={onSelectAndCloseSearch}
               />
