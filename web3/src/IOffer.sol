@@ -14,4 +14,5 @@ interface IOffer {
     function buyShares(address applicant, uint256 shares) payable external;
     function calculateShares(MatchData memory matchData, uint256 etherIn) external view returns (uint256 shares);
     function reclaimBounty(address payable receiver) external;
+    function isClosed() external view returns (bool);
 }

@@ -15,9 +15,9 @@ contract LinkedUp is ILinkedUp, Ownable {
     uint256 public MIN_DURATION = 1 hours;
     uint256 public MAX_DURATION = 365 days;
 
-    mapping(address => address) public ownerOfApplicant;  // Returns the address owning the applicant smart contract with the specified address
+    mapping(address => address) public deployerOfApplicant;  // Returns the address owning the applicant smart contract with the specified address
     address[] public offers;  // TODO: Come up with a better way of storing offers
-
+    mapping(address => uint256[]) offersOf;
     constructor (address payable _vault, uint256 _proposalFee, uint256 _bounty) {
         VAULT = _vault;
         emit VaultChanged(address(0), _vault, owner());
@@ -30,7 +30,13 @@ contract LinkedUp is ILinkedUp, Ownable {
     function createApplicantProfile() public returns (address) {
         Applicant applicant = new Applicant();
         applicant.transferOwnership(msg.sender);
-        ownerOfApplicant[address(applicant)] = msg.sender;
+        deployerOfApplicant[address(applicant)] = msg.sender;
+        return address(applicant);
+    }
+
+    function createApplicantProfileWithData(bytes32[] calldata _data) public returns (address) {
+        IApplicant applicant = IApplicant(createApplicantProfile());
+        applicant.addData(_data);
         return address(applicant);
     }
 
@@ -39,8 +45,16 @@ contract LinkedUp is ILinkedUp, Ownable {
         // The rest of the parameters are validated in Offer.sol
         Offer offer = new Offer(address(this), _data, _bounty, _minBet, _nWinners, block.timestamp + _duration);
         offer.transferOwnership(msg.sender);
+        offersOf[msg.sender].push(offers.length);
         offers.push(address(offer));
         return address(offer);
+    }
+
+    function deleteOffer(uint256 offer) public {
+        require(offer < offers.length, "Invalid offer index");
+        require(offers[offer] != address(0), "Offer was already removed");
+        require(IOffer(offers[offer]).isClosed(), "Offer is still open");
+        offers[offer] = address(0);
     }
 
     function changeVaultAddress(address payable _vault) onlyOwner public {

@@ -10,8 +10,14 @@ interface ILinkedUp {
     function VAULT() external view returns (address payable VAULT);
     function MIN_MATCH_PROPOSAL_FEE() external view returns (uint256);
     function MIN_OFFER_BOUNTY() external view returns (uint256);
+    function MIN_DURATION() external view returns (uint256);
+    function MAX_DURATION() external view returns (uint256);
     
-    function ownerOfApplicant(address applicant) external view returns (address);
+    function deployerOfApplicant(address applicant) external view returns (address);
+
+    function createApplicantProfile() external returns (address);
+    function createApplicantProfileWithData(bytes32[] calldata _data) external returns (address);
+    function createOffer(bytes32 _data, uint256 _bounty, uint256 _minBet, uint16 _nWinners, uint256 _duration) external returns (address);
 
     function changeVaultAddress(address payable _vault) external;
     function changeMinimumMatchProposalFee(uint256 _fee) external;
