@@ -1,33 +1,10 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import Header from "../../components/header/header";
-import mockData from "../../utils/mockData";
 import { Candidate, ExpandedJobPosting } from "../../types/global";
 
-import JobView from "./JobView";
-
-const CandidateView = ({
-  selectedCandidate,
-  setSelectedCandidate,
-}: {
-  selectedCandidate: Candidate | null;
-  setSelectedCandidate: Dispatch<SetStateAction<Candidate | null>>;
-}) => {
-  const candidates = mockData.candidates;
-
-  return (
-    <div className="bg-white flex-1 w-full h-full m-3 p-3">
-      <h3 className="font-bold text-2xl text-center">Candidates</h3>
-
-      {candidates.map((candidate, i) => {
-        return (
-          <div className="p-2 " key={i}>
-            {candidate.name}
-          </div>
-        );
-      })}
-    </div>
-  );
-};
+import CandidateView from "./CandidateView";
+import ListView from "./ListView";
+import mockData from "../../utils/mockData";
 
 const LinkMatchView = () => {
   const [selectedJob, setSelectedJob] = useState<ExpandedJobPosting | null>(
@@ -46,10 +23,17 @@ const LinkMatchView = () => {
 
       <div className="flex-1 flex flex-col">
         <div className="container mx-auto grid gap-4 grid-cols-2 grid-rows-1 flex-1">
-          <JobView selectedJob={selectedJob} setSelectedJob={setSelectedJob} />
-          <CandidateView
-            selectedCandidate={selectedCandidate}
-            setSelectedCandidate={setSelectedCandidate}
+          <ListView
+            typeOfData="Job"
+            data={mockData.jobPostings}
+            selected={selectedJob}
+            setSelected={setSelectedJob}
+          />
+          <ListView
+            typeOfData="Candidate"
+            data={mockData.candidates}
+            selected={selectedCandidate}
+            setSelected={setSelectedCandidate}
           />
         </div>
       </div>

@@ -1,8 +1,6 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
-import { ExpandedJobPosting } from "../../types/global";
-import mockData from "../../utils/mockData";
 import ExpandCollapseToggle from "../../components/header/toggle";
-import { isExternal } from "util/types";
+import React, { useState } from "react";
+import { ExpandedJobPosting } from "../../types/global";
 
 const JobPost = ({
   job,
@@ -53,29 +51,4 @@ const JobPost = ({
   );
 };
 
-const JobView = ({
-  selectedJob,
-  setSelectedJob,
-}: {
-  selectedJob: ExpandedJobPosting | null;
-  setSelectedJob: Dispatch<SetStateAction<ExpandedJobPosting | null>>;
-}) => {
-  return (
-    <div className="bg-white flex-1 w-full h-full m-3">
-      <h3 className="font-bold text-2xl text-center">Select a job...</h3>
-
-      <div className="flex flex-col">
-        {mockData.jobPostings.map((job: ExpandedJobPosting) => (
-          <JobPost
-            job={job}
-            key={job.id}
-            selectedJob={selectedJob}
-            onPress={() => setSelectedJob(job)}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export default JobView;
+export default JobPost;
