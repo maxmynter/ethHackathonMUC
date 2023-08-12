@@ -5,16 +5,6 @@ import { Candidate, ExpandedJobPosting } from "../../types/global";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
-const CandidateScore = ({
-  backedAmount,
-  backersCount,
-}: {
-  backedAmount: number;
-  backersCount: number;
-}) => {
-  return <p>{backedAmount * backersCount}</p>;
-};
-
 const ExpandCollapseToggle = ({
   isExpanded,
   handleToggle,
@@ -38,17 +28,51 @@ const ExpandCollapseToggle = ({
   );
 };
 
+const DisplaySingleScore = ({
+  scoreName,
+  score,
+}: {
+  score: number;
+  scoreName: string;
+}) => {
+  return (
+    <div className="flex flex-col ml-4 mr-4 items-center text-center ">
+      <h2 className="">{scoreName}</h2> <p className="font-bold">{score}</p>
+    </div>
+  );
+};
+const CandidateScores = ({
+  backedAmount,
+  backersCount,
+}: {
+  backedAmount: number;
+  backersCount: number;
+}) => {
+  return (
+    <div className="flex flex-row justify-between">
+      <DisplaySingleScore score={backersCount} scoreName="No. Backers" />
+      <DisplaySingleScore score={backedAmount} scoreName="Backing (USD)" />
+      <DisplaySingleScore
+        score={backersCount * backedAmount}
+        scoreName="Score"
+      />
+    </div>
+  );
+};
+
 const DisplayCandidate = ({ candidate }: { candidate: Candidate }) => {
   return (
     <li key={candidate.id} className="mb-3">
-      <input type="checkbox" className="mr-2" />
-      <a href={candidate.portfolioLink} className="text-blue-500">
-        {candidate.name}
-      </a>
-      <CandidateScore
-        backedAmount={candidate.backedAmount}
-        backersCount={candidate.backersCount}
-      />
+      <div className="flex flex-row items-center">
+        <input type="checkbox" className="mr-2" />
+        <a href={candidate.portfolioLink} className="text-blue-500 pl-2 pr-2">
+          {candidate.name}
+        </a>
+        <CandidateScores
+          backedAmount={candidate.backedAmount}
+          backersCount={candidate.backersCount}
+        />
+      </div>
     </li>
   );
 };
