@@ -24,7 +24,7 @@ const MatchHeader = ({
     }
   };
 
-  const getPayoutIfSuccess = (): number => {
+  const getPayoutIfSuccess = (): string => {
     if (selectedJob && selectedJob.backedTokens && selectedCandidate) {
       return Number(
         selectedJob.bountyUSD *
@@ -32,7 +32,7 @@ const MatchHeader = ({
           (1 / selectedCandidate.backersCount)
       ).toFixed(2);
     } else {
-      return 0;
+      return String(0);
     }
   };
   return (
