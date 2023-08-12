@@ -13,7 +13,7 @@ const toCompany: HeaderButtonObject = {
   linkTo: "/company",
 };
 const toMatchmaking: HeaderButtonObject = {
-  text: "Match",
+  text: "Matchmake!",
   linkTo: "/linkmatch",
 };
 const toApply: HeaderButtonObject = {
