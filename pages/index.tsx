@@ -28,7 +28,7 @@ const HeroBox = ({
           className={`w-64 h-64 p-4 flex justify-center rounded-xl items-center ${colorOverlay} flex-col`}
         >
           <p className="text-6xl">{emoji}</p>
-          <p className="text-base pt-2">{text}</p>
+          <p className="pt-3 leading-5 font-weight-600">{text}</p>
         </div>
         <div className="flex flex-col justify-end align-bottom mt-7">
           <h2 className="text-xl font-semibold mb-2 text-white">{footer}</h2>
@@ -52,15 +52,15 @@ const Home: NextPage = () => {
             <HeroBox
               linkTo="/company"
               emoji="💁"
-              colorOverlay="bg-green-300"
-              colorUnderlay="bg-green-700"
+              colorOverlay="bg-white/50"
+              colorUnderlay="bg-gradient-to-b from-fuchsia-300 to-pink-600"
               text="Crowdsource the Pre-Selection of High-Potential Job Seekers and Save Days of Work."
               footer="I want to fill a position"
             />
             <HeroBox
               linkTo="/linkmatch"
-              colorOverlay="bg-blue-300"
-              colorUnderlay="bg-blue-700"
+              colorOverlay="bg-white/50"
+              colorUnderlay="bg-gradient-to-b from-blue-300 to-purple-600"
               emoji="🤑"
               text="Earn flexible Income on your Terms by Successfully Matching Open Positions with Job Seekers"
               footer="Make Money Now"
@@ -68,8 +68,8 @@ const Home: NextPage = () => {
             <HeroBox
               linkTo="/applicant"
               emoji="🧑‍💻"
-              colorOverlay="bg-red-300"
-              colorUnderlay="bg-red-700"
+              colorOverlay="bg-white/50"
+              colorUnderlay="bg-gradient-to-b from-green-300 to-green-600"
               text="Your Perfect Position. In Autopilot. Be matched by a Human - with Skin in the Game"
               footer="I want a Job"
             />
