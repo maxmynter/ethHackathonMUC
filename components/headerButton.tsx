@@ -12,7 +12,7 @@ const HeaderButton = ({
   const path = usePathname();
   return (
     <div
-      className={`border-${size} border-sky-500 m-${size} rounded-lg ${
+      className={`border-${size} border-sky-500 flex flex-col justify-center m-${size} rounded-lg ${
         path === buttonInfo.linkTo ? "text-white bg-sky-500" : ""
       }`}
     >
