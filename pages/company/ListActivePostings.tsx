@@ -62,10 +62,13 @@ const ActiveJobPostings = () => {
           <li
             key={jobPosting.id}
             className="p-4 border mb-4 cursor-pointer hover:bg-gray-100 rounded-md"
+            onClick={() => {
+              if (expandedJobId !== jobPosting.id) {
+                handleJobClick(jobPosting.id);
+              }
+            }}
           >
-            <a href={`/job/${jobPosting.id}`} className="text-sky-500 m-3">
-              {jobPosting.title}
-            </a>
+            <a className="text-sky-500 m-3">{jobPosting.title}</a>
             <div className="flex justify-between">
               <div className="flex flex-row">
                 <div className="text-gray-500 m-3">
