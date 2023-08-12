@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Header from "../../components/header";
+import Header from "../../components/header/header";
 import { JobPosting } from "../../types/global";
 
 const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {

@@ -1,4 +1,4 @@
-import { HeaderButtonObject } from "../types/global";
+import { HeaderButtonObject } from "../../types/global";
 import React from "react";
 import HeaderButton from "./headerButton";
 import Image from "next/image";

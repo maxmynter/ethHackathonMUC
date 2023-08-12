@@ -1,4 +1,4 @@
-import Header from "../../components/header";
+import Header from "../../components/header/header";
 import mockData from "../../utils/mockData";
 
 import JobView from "./JobView";
