@@ -11,6 +11,8 @@ contract LinkedUp is ILinkedUp, Ownable {
     uint256 public MIN_MATCH_PROPOSAL_FEE;  // the minimum amount matchmakers have to put at stake when proposing matches
     uint256 public MIN_OFFER_BOUNTY;  // the minimum amount needed to be offered as a bounty for successful matches
 
+    mapping(address => address) public ownerOfApplicant;  // Returns the address owning the applicant smart contract with the specified address
+
     constructor (address payable _vault, uint256 _proposalFee, uint256 _bounty) {
         VAULT = _vault;
         emit VaultChanged(address(0), _vault, owner());

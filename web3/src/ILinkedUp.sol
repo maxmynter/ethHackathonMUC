@@ -7,7 +7,11 @@ interface ILinkedUp {
     event MinimumMatchProposalFeeChanged(uint256 _from, uint256 _to, address indexed by);
     event MinimumOfferBountyChanged(uint256 _from, uint256 _to, address indexed by);
 
-    function VAULT() external returns (address payable VAULT);
+    function VAULT() external view returns (address payable VAULT);
+    function MIN_MATCH_PROPOSAL_FEE() external view returns (uint256);
+    function MIN_OFFER_BOUNTY() external view returns (uint256);
+    
+    function ownerOfApplicant(address applicant) external view returns (address);
 
     function changeVaultAddress(address payable _vault) external;
     function changeMinimumMatchProposalFee(uint256 _fee) external;
