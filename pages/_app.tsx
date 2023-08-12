@@ -12,6 +12,7 @@ import {
   zora,
 } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
+import React from "react";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
