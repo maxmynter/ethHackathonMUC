@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { USD_TO_ETH } from "../../utils/usdToEth";
 import mockJobPostings from "./jobPostingsMockData";
 import { ExpandedJobPosting } from "../../types/global";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 const CandidateScore = ({
   backedAmount,
@@ -11,6 +13,29 @@ const CandidateScore = ({
   backersCount: number;
 }) => {
   return <p>{backedAmount * backersCount}</p>;
+};
+
+const ExpandCollapseToggle = ({
+  isExpanded,
+  handleToggle,
+}: {
+  isExpanded: boolean;
+  handleToggle: React.MouseEventHandler<HTMLDivElement>;
+}) => {
+  return (
+    <div
+      className="rounded-full w-12 h-12 flex justify-center items-center align-middle hover:bg-gray-600 hover:text-white text-bold"
+      onClick={handleToggle}
+    >
+      <p>
+        {isExpanded ? (
+          <FontAwesomeIcon icon={faChevronUp} />
+        ) : (
+          <FontAwesomeIcon icon={faChevronDown} />
+        )}
+      </p>
+    </div>
+  );
 };
 
 const ActiveJobPostings = () => {
@@ -37,19 +62,24 @@ const ActiveJobPostings = () => {
           <li
             key={jobPosting.id}
             className="p-4 border mb-4 cursor-pointer hover:bg-gray-100 rounded-md"
-            onClick={() => handleJobClick(jobPosting.id)}
           >
             <a href={`/job/${jobPosting.id}`} className="text-sky-500 m-3">
               {jobPosting.title}
             </a>
-            <div className="flex flex-row">
-              <div className="text-gray-500 m-3">
-                Suggestions: {jobPosting.suggestions}
+            <div className="flex justify-between">
+              <div className="flex flex-row">
+                <div className="text-gray-500 m-3">
+                  Suggestions: {jobPosting.suggestions}
+                </div>
+                <div className="text-gray-500 m-3">
+                  Cumulatively Backed by:{" "}
+                  {(jobPosting.backedTokens / USD_TO_ETH).toFixed(2)} (USD)
+                </div>
               </div>
-              <div className="text-gray-500 m-3">
-                Cumulatively Backed by:{" "}
-                {(jobPosting.backedTokens / USD_TO_ETH).toFixed(2)} (USD)
-              </div>
+              <ExpandCollapseToggle
+                isExpanded={expandedJobId === jobPosting.id}
+                handleToggle={() => handleJobClick(jobPosting.id)}
+              />
             </div>
             {expandedJobId === jobPosting.id && (
               <div className="mt-4">
