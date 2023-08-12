@@ -71,8 +71,10 @@ const JobListItemContent = ({
 
 const JobListItemDetailContent = ({
   jobPosting,
+  onSelectAndCloseSearch,
 }: {
   jobPosting: ExpandedJobPosting;
+  onSelectAndCloseSearch: React.MouseEventHandler<HTMLButtonElement>;
 }) => {
   return (
     <div className="mt-4">
@@ -95,7 +97,10 @@ const JobListItemDetailContent = ({
         ))}
       </ul>
       <div className="mt-4">
-        <button className="bg-sky-500 text-white py-2 px-4 rounded">
+        <button
+          className="bg-sky-500 hover:bg-sky-700 text-white py-2 px-4 rounded"
+          onClick={onSelectAndCloseSearch}
+        >
           Select and Close Search
         </button>
         <p className="text-gray-400 mt-2">
@@ -107,8 +112,6 @@ const JobListItemDetailContent = ({
   );
 };
 
-
-
 const ActiveJobPostings = () => {
   const [expandedJobId, setExpandedJobId] = useState<number | null>(null);
   const [jobPostings, setJobPostings] = useState<ExpandedJobPosting[]>([]);
@@ -119,6 +122,11 @@ const ActiveJobPostings = () => {
     } else {
       setExpandedJobId(jobId);
     }
+  };
+
+  const onSelectAndCloseSearch = () => {
+    // Handle selcet Candidates.
+    setExpandedJobId(null);
   };
 
   useEffect(() => {
@@ -145,7 +153,10 @@ const ActiveJobPostings = () => {
               handleJobClick={handleJobClick}
             />
             {expandedJobId === jobPosting.id && (
-              <JobListItemDetailContent jobPosting={jobPosting} />
+              <JobListItemDetailContent
+                jobPosting={jobPosting}
+                onSelectAndCloseSearch={onSelectAndCloseSearch}
+              />
             )}
           </li>
         ))}
