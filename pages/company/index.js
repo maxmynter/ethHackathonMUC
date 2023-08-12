@@ -1,5 +1,11 @@
+import Header from "../../components/header";
 const CompanyView = () => {
-  return <div>Company View</div>;
+  return (
+    <div>
+      <Header />
+      <div>Company View</div>
+    </div>
+  );
 };
 
 export default CompanyView;
