@@ -34,7 +34,7 @@ const Header = ({
     <div className="container mx-auto">
       <div className="flex flex-row justify-center mt-10  w-full h-12">
         <div>
-          <Image src="./linkedup.svg" width={200} height={140} alt="LinkedUp" />
+          <Image src="./linkedup.svg" width={150} height={80} alt="LinkedUp" />
         </div>
 
         <div className="flex flex-row p-1 flex-1 text-center mx-auto px-10">
