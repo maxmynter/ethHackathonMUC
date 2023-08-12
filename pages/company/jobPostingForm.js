@@ -4,7 +4,7 @@ const JobPostingForm = () => {
   const [usdAmount, setUsdAmount] = useState("");
   const [ethAmount, setEthAmount] = useState("");
 
-  const usdToEthConversionRate = 0.02; // Replace with the actual conversion rate
+  const usdToEthConversionRate = 0.00054;
 
   const handleUsdChange = (event) => {
     const newUsdAmount = event.target.value;
