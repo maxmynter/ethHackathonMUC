@@ -21,7 +21,7 @@ contract Offer is IOffer, Ownable {
     mapping(address => mapping(address => uint256)) public bets;
     address[] winners;
 
-    uint256 INITIAL_X = 50;
+    uint256 INITIAL_X;
     uint256 MAX_SHARES = 1_000_000;
     uint256 K;
 
@@ -49,33 +49,30 @@ contract Offer is IOffer, Ownable {
         expirationTime = _expirationTime;
         data = _data;
         reclaimed = false;
-        K = MAX_SHARES * _minBet;
+
+        INITIAL_X = _minBet;
+        K = MAX_SHARES * INITIAL_X;
     }
 
-    function buyShares(address applicant, uint256 shares) isOpen payable public {
+    function buyShares(address applicant, uint256 minShares) isOpen payable public {
         require(factory.ownerOfApplicant(applicant) != address(0), "Applicant is not registered with the factory");
         require(!(matchDataOf[applicant].applicantAck && matchDataOf[applicant].posterAck), "Can't bet on applicants who where already selected for the offer");
-        require(shares > 0, "Shares cannot be zero");
-        uint256 price = calculateSharesPrice(matchDataOf[applicant], shares);
-        require(price >= msg.value, "Insufficient funds");
+        require(minShares > 0, "minShares cannot be zero");
+        uint256 shares = calculateShares(matchDataOf[applicant], msg.value);
+        require(shares >= minShares, "Slippage control");
         matchDataOf[applicant].totalShares += shares;
-        matchDataOf[applicant].etherValue += price;
+        matchDataOf[applicant].etherValue += msg.value;
         bets[msg.sender][applicant] += shares;
         // TODO: Integrate PUSH Protocol
 
         // TODO: Consider adding some part of the bet to the bounty
-        (bool res,) = factory.VAULT().call{value: price}("");
-        require(res);
-
-        // Return the leftover funds
-        // TODO: Check whether this is secure
-        (res,) = payable(msg.sender).call{value: msg.value - price}("");
+        (bool res,) = factory.VAULT().call{value: msg.value}("");
         require(res);
     }
 
-    function calculateSharesPrice(MatchData memory matchData, uint256 amount) public view returns (uint256 price) {
-        // TODO: Think of a nice formula
-        price = amount * minBet;
+    function calculateShares(MatchData memory matchData, uint256 etherIn) public view returns (uint256 shares) {
+        // TODO: Come up with a nicer formula
+        shares = ((MAX_SHARES - matchData.totalShares) * etherIn) / (INITIAL_X + matchData.etherValue + etherIn);
     }
 
     function selectApplicant(address applicant) onlyOwner isOpen public {
