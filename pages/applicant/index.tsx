@@ -150,7 +150,7 @@ const ReferredJobsList = ({ jobs }: { jobs: JobPosting[] }) => {
                   {job.backedTokens}
                 </td>
                 <td className="py-2 px-4 border-b border-gray-300">
-                  {job.backedByN}
+                  {job.suggestions}
                 </td>
               </tr>
             ))

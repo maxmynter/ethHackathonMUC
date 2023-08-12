@@ -6,7 +6,8 @@ export interface HeaderButtonObject {
 interface Candidate {
   id: number;
   name: string;
-  portfolioLink: string;
+  selfDescription?:string
+  portfolioLink: string | string[];
   backedAmount: number;
   backersCount: number;
 }
@@ -20,7 +21,8 @@ interface JobPosting {
   id: number;
   title: string;
   companyName: string;
-  suggestions: number;
-  backedTokens: number;
-  backedByN: number;
+  suggestions?: number;
+  backedTokens?: number;
+  backedByN?: number;
+  searchQuery?: string;
 }

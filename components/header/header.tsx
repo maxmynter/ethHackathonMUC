@@ -5,10 +5,6 @@ import Image from "next/image";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
 
-const toIndex: HeaderButtonObject = {
-  text: "Home",
-  linkTo: "/",
-};
 const toCompany: HeaderButtonObject = {
   text: "🔍 Search Candidates",
   linkTo: "/company",
@@ -22,7 +18,7 @@ const toApply: HeaderButtonObject = {
   linkTo: "/applicant",
 };
 
-const allButtons = [toIndex, toCompany, toMatchmaking, toApply];
+const allButtons = [toCompany, toMatchmaking, toApply];
 
 const Header = ({
   buttonArray = allButtons,
@@ -32,31 +28,33 @@ const Header = ({
   size?: number;
 }) => {
   return (
-    <div className="pl-2 pr-2 mx-auto py-2 w-full  flex flex-col justify-between bg-stone-200">
-      <div className="flex flex-row justify-center w-full h-12">
-        <div>
-          <Link href="/">
-            <Image
-              src="./linkedup.svg"
-              width={150}
-              height={80}
-              alt="LinkedUp"
-            />
-          </Link>
-        </div>
+    <div className="container mx-auto">
+      <div className="px-0  py-5 mx-auto w-full flex flex-col justify-between">
+        <div className="flex flex-row justify-center w-full ">
+          <div>
+            <Link href="/">
+              <Image
+                src="./linkedup.svg"
+                width={130}
+                height={80}
+                alt="LinkedUp"
+              />
+            </Link>
+          </div>
 
-        <div className="flex ml-12 mr-12 flex-row border-l-2 border-r-2 border-gray-400 flex-1 text-center  justify-between mx-auto px-20">
-          {buttonArray.map((buttonInfo) => (
-            <HeaderButton
-              key={buttonInfo.linkTo}
-              buttonInfo={buttonInfo}
-              size={String(size)}
-            />
-          ))}
-        </div>
+          <div className="flex mh-12 flex-row flex-1 text-center mx-auto px-20">
+            {buttonArray.map((buttonInfo) => (
+              <HeaderButton
+                key={buttonInfo.linkTo}
+                buttonInfo={buttonInfo}
+                size={String(size)}
+              />
+            ))}
+          </div>
 
-        <div className="text-right">
-          <ConnectButton />
+          <div className="text-right">
+            <ConnectButton />
+          </div>
         </div>
       </div>
     </div>
