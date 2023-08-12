@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { USD_TO_ETH } from "../../utils/usdToEth";
 import mockJobPostings from "./jobPostingsMockData";
-import { ExpandedJobPosting } from "../../types/global";
+import { Candidate, ExpandedJobPosting } from "../../types/global";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
@@ -38,6 +38,21 @@ const ExpandCollapseToggle = ({
   );
 };
 
+const DisplayCandidate = ({ candidate }: { candidate: Candidate }) => {
+  return (
+    <li key={candidate.id} className="mb-3">
+      <input type="checkbox" className="mr-2" />
+      <a href={candidate.portfolioLink} className="text-blue-500">
+        {candidate.name}
+      </a>
+      <CandidateScore
+        backedAmount={candidate.backedAmount}
+        backersCount={candidate.backersCount}
+      />
+    </li>
+  );
+};
+
 const JobListItemContent = ({
   jobPosting,
   expandedJobId,
@@ -69,6 +84,27 @@ const JobListItemContent = ({
   );
 };
 
+const EndSearchButton = ({
+  onSelectAndCloseSearch,
+}: {
+  onSelectAndCloseSearch: React.MouseEventHandler<HTMLButtonElement>;
+}) => {
+  return (
+    <div className="mt-4">
+      <button
+        className="bg-sky-500 hover:bg-sky-700 text-white py-2 px-4 rounded"
+        onClick={onSelectAndCloseSearch}
+      >
+        Select and Close Search
+      </button>
+      <p className="text-gray-400 mt-2">
+        Select ticked candidates, close the contract, and pay out helpful
+        hunters.
+      </p>
+    </div>
+  );
+};
+
 const JobListItemDetailContent = ({
   jobPosting,
   onSelectAndCloseSearch,
@@ -79,35 +115,15 @@ const JobListItemDetailContent = ({
   return (
     <div className="mt-4">
       <h2 className="text-lg font-semibold mb-2">
-        Bounty: ${jobPosting.bountyUSD.toFixed(2)} (USD)
+        Your Bounty: ${jobPosting.bountyUSD.toFixed(2)} (USD)
       </h2>
       <h3 className="text-md font-medium mb-2">Candidates:</h3>
       <ul>
         {jobPosting.candidates.map((candidate) => (
-          <li key={candidate.id} className="mb-3">
-            <input type="checkbox" className="mr-2" />
-            <a href={candidate.portfolioLink} className="text-blue-500">
-              {candidate.name}
-            </a>
-            <CandidateScore
-              backedAmount={candidate.backedAmount}
-              backersCount={candidate.backersCount}
-            />
-          </li>
+          <DisplayCandidate key={candidate.id} candidate={candidate} />
         ))}
       </ul>
-      <div className="mt-4">
-        <button
-          className="bg-sky-500 hover:bg-sky-700 text-white py-2 px-4 rounded"
-          onClick={onSelectAndCloseSearch}
-        >
-          Select and Close Search
-        </button>
-        <p className="text-gray-400 mt-2">
-          Select ticked candidates, close the contract, and pay out helpful
-          hunters.
-        </p>
-      </div>
+      <EndSearchButton onSelectAndCloseSearch={onSelectAndCloseSearch} />
     </div>
   );
 };
