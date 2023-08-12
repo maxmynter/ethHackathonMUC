@@ -12,9 +12,9 @@ const HeaderButton = ({
   const path = usePathname();
   return (
     <div
-      className={`border-${size} border-sky-500 flex flex-col justify-center m-${size} rounded-lg ${
+      className={`border-b-4 border-sky-500 flex flex-col justify-center rounded-lg ${
         path === buttonInfo.linkTo
-          ? "text-white bg-sky-500 hover:bg-sky-700"
+          ? "text-white bg-sky-500 hover:bg-sky-700 hover:border-sky-700"
           : "hover:bg-sky-700 hover:border-sky-700 hover:text-white"
       }`}
     >
