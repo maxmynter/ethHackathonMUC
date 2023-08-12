@@ -32,7 +32,7 @@ const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-4 bg-white shadow-md rounded-lg mb-11">
+    <div className=" max-w-2xl mx-auto mt-8 p-4 bg-white shadow-md rounded-lg mb-11">
       <h2 className="text-xl font-semibold mb-4">
         How does your dream job look like?
       </h2>
