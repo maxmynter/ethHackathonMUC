@@ -37,7 +37,7 @@ const Header = ({
           <Image src="./linkedup.svg" width={150} height={80} alt="LinkedUp" />
         </div>
 
-        <div className="flex flex-row p-1 flex-1 text-center mx-auto px-10">
+        <div className="flex flex-row p-2 flex-1 text-center mx-auto px-10">
           {buttonArray.map((buttonInfo) => (
             <HeaderButton
               key={buttonInfo.linkTo}

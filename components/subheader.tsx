@@ -12,7 +12,9 @@ const SubHeaderButton = ({
   return (
     <div
       className={`border-2 border-sky-500 m-2 rounded-lg ${
-        isActive ? "text-white bg-sky-500" : ""
+        isActive
+          ? "text-white bg-sky-500"
+          : "hover:bg-sky-700 hover:border-sky-700 hover:text-white"
       }`}
       onClick={onClick}
     >
