@@ -1,5 +1,5 @@
-import Header from "../../components/header";
-import SubHeader from "../../components/subheader";
+import Header from "../../components/header/header";
+import SubHeader from "../../components/header/subheader";
 import ActiveJobPostings from "./ListActivePostings";
 import JobPostingForm from "./jobPostingForm";
 import { useState } from "react";

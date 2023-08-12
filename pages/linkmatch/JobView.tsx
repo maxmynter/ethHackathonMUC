@@ -5,15 +5,19 @@ import mockData from "../../utils/mockData";
 const JobPost = ({
   job,
   selectedJob,
+  onPress,
 }: {
   job: ExpandedJobPosting;
-  selectedJob: ExpandedJobPosting;
+  selectedJob: ExpandedJobPosting | null;
+  onPress: Function;
 }) => {
   return (
     <div>
       <div
         className={`flex flex-col hover:bg-slate-50 cursor-pointer p-3 ${
-          job.id === selectedJob.id ? "bg-slate-400" : ""
+          selectedJob !== null && job.id === selectedJob.id
+            ? "bg-slate-400"
+            : ""
         }`}
       >
         <h3 className="font-bold">{job.title}</h3>
@@ -24,7 +28,9 @@ const JobPost = ({
 };
 
 const JobView = () => {
-  const [setSelectedJob, selectedJob] = useState(null);
+  const [selectedJob, setSelectedJob] = useState<ExpandedJobPosting | null>(
+    null
+  );
 
   return (
     <div className="bg-white flex-1 w-full h-full m-3">
