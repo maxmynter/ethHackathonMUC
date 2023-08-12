@@ -15,8 +15,8 @@ contract Offer is IOffer, Ownable {
     bool reclaimed;
     
     IApplicant[] proposed;
-    mapping(address => uint256) totalShares;
-    mapping(address => mapping(address => uint256)) bets;
+    mapping(address => uint256) public totalShares;
+    mapping(address => mapping(address => uint256)) public bets;
 
     modifier isOpen() {
         require(expirationTime > block.timestamp, "Offer already closed");
@@ -37,11 +37,7 @@ contract Offer is IOffer, Ownable {
         reclaimed = false;
     }
 
-    function buyShares(address[] calldata applicants, uint256[] calldata _bets, uint256[] calldata minShares) payable external {
-
-    }
-
-    function buyShare(address applicant, uint256 shares) isOpen payable public {
+    function buyShares(address applicant, uint256 shares) isOpen payable public {
         // TODO: validate applicant
         require(shares > 0, "Shares cannot be zero");
         uint256 price = calculateSharesPrice(totalShares[applicant], shares);
