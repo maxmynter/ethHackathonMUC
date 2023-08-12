@@ -12,7 +12,7 @@ const JobPost = ({
   return (
     <div>
       <div
-        className={`flex flex-col hover:bg-slate-50 p-3 ${
+        className={`flex flex-col hover:bg-slate-50 cursor-pointer p-3 ${
           job.id === selectedJob.id ? "bg-slate-400" : ""
         }`}
       >
