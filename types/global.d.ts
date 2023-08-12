@@ -19,6 +19,8 @@ interface ExpandedJobPosting extends JobPosting {
 interface JobPosting {
   id: number;
   title: string;
+  companyName: string;
   suggestions: number;
   backedTokens: number;
+  backedByN: number;
 }
