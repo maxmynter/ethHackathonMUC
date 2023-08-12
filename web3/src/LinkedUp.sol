@@ -7,9 +7,9 @@ import "openzeppelin-contracts/contracts/access/Ownable.sol";
 
 contract LinkedUp is ILinkedUp, Ownable {
 
-    address payable VAULT;  // the address to which match proposal fees are sent to
-    uint256 MIN_MATCH_PROPOSAL_FEE;  // the minimum amount matchmakers have to put at stake when proposing matches
-    uint256 MIN_OFFER_BOUNTY;  // the minimum amount needed to be offered as a bounty for successful matches
+    address payable public VAULT;  // the address to which match proposal fees are sent to
+    uint256 public MIN_MATCH_PROPOSAL_FEE;  // the minimum amount matchmakers have to put at stake when proposing matches
+    uint256 public MIN_OFFER_BOUNTY;  // the minimum amount needed to be offered as a bounty for successful matches
 
     constructor (address payable _vault, uint256 _proposalFee, uint256 _bounty) {
         VAULT = _vault;
@@ -41,4 +41,6 @@ contract LinkedUp is ILinkedUp, Ownable {
         MIN_OFFER_BOUNTY = _bounty;
         emit MinimumOfferBountyChanged(old, _bounty, owner());
     }
+
+    receive() payable external {}
 }
