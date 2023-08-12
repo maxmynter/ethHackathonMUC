@@ -1,8 +1,10 @@
 import React from "react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+
 import type { NextPage } from "next";
 import Head from "next/head";
 import Header from "../components/header";
+
+import Image from "next/image";
 
 const Home: NextPage = () => {
   return (
@@ -12,18 +14,23 @@ const Home: NextPage = () => {
         <link href="/favicon.ico" rel="icon" />
       </Head>
 
-      <main>
+      <main className="text-center">
         <Header />
-        <ConnectButton />
 
-        <h1 className="text-3xl font-bold underline">Welcome to LinkedUp!</h1>
+        <br />
+        <br />
+
+        <h1 className="text-slate-900 font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-center mt-10">
+          Match resumes with jobs for 🤑
+        </h1>
+        <h3 className="mt-6 text-lg text-slate-500 text-center max-w-3xl mx-auto ">
+          Think you'd make a good matchmaker? Help companies save time by
+          matching great candidates with their open positions. Pick well and win
+          big!
+        </h3>
       </main>
 
-      <footer>
-        <a href="https://rainbow.me" rel="noopener noreferrer" target="_blank">
-          Made with ❤️ by your frens at 🌈
-        </a>
-      </footer>
+      <footer></footer>
     </div>
   );
 };

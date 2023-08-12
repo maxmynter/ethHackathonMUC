@@ -27,8 +27,8 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: "RainbowKit App",
-  projectId: "YOUR_PROJECT_ID",
+  appName: "LinkedUp",
+  projectId: "4e82bdefc973c5b6ee0dfd1e56d6623e", //walletconnect
   chains,
 });
 
