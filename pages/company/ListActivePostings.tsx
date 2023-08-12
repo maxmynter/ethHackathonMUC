@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { USD_TO_ETH } from "../../utils/usdToEth";
-import mockJobPostings from "./JobPostingsMockDate";
+import mockJobPostings from "./jobPostingsMockData";
 import { ExpandedJobPosting } from "../../types/global";
 
 const CandidateScore = ({
