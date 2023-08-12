@@ -12,12 +12,12 @@ contract LinkedUp is ILinkedUp, Ownable {
     address payable public VAULT;  // the address to which match proposal fees are sent to
     uint256 public MIN_MATCH_PROPOSAL_FEE;  // the minimum amount matchmakers have to put at stake when proposing matches
     uint256 public MIN_OFFER_BOUNTY;  // the minimum amount needed to be offered as a bounty for successful matches
-    uint256 public MIN_DURATION = 1 hours;
-    uint256 public MAX_DURATION = 365 days;
+    uint256 public MIN_DURATION = 1 hours;  // The minimum duration an offer has to last
+    uint256 public MAX_DURATION = 365 days;  // The maximum duration an offer can last
 
     mapping(address => address) public deployerOfApplicant;  // Returns the address owning the applicant smart contract with the specified address
-    address[] public offers;  // TODO: Come up with a better way of storing offers
-    mapping(address => uint256[]) offersOf;
+    address[] public offers;  // A list of all offers. Zeros indicate closed/resolved offers
+    mapping(address => uint256[]) offersOf;  // Maps an address to all offers posted by the account
 
     constructor (address payable _vault, uint256 _proposalFee, uint256 _bounty) {
         VAULT = _vault;
@@ -32,6 +32,7 @@ contract LinkedUp is ILinkedUp, Ownable {
         Applicant applicant = new Applicant();
         applicant.transferOwnership(msg.sender);
         deployerOfApplicant[address(applicant)] = msg.sender;
+        emit ApplicantProfileCreation(msg.sender, address(applicant));
         return address(applicant);
     }
 
@@ -45,13 +46,15 @@ contract LinkedUp is ILinkedUp, Ownable {
         return offers.length;
     }
 
-    function createOffer(bytes32 _data, uint256 _bounty, uint256 _minBet, uint16 _nWinners, uint256 _duration) public returns (address) {
+    function createOffer(bytes32 _data, uint256 _bounty, uint256 _minBet, uint16 _nWinners, uint256 _duration) public payable returns (address) {
         require(_duration >= MIN_DURATION && _duration <= MAX_DURATION, "Duration is out of bounds");
+        require(msg.value == _bounty, "msg.value != bounty");
         // The rest of the parameters are validated in Offer.sol
-        Offer offer = new Offer(address(this), _data, _bounty, _minBet, _nWinners, block.timestamp + _duration);
+        Offer offer = new Offer{value: msg.value}(address(this), _data, _bounty, _minBet, _nWinners, block.timestamp + _duration);
         offer.transferOwnership(msg.sender);
         offersOf[msg.sender].push(offers.length);
         offers.push(address(offer));
+        emit OfferCreation(msg.sender, address(offer), _bounty, _minBet, _nWinners, _duration);
         return address(offer);
     }
 

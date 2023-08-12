@@ -9,18 +9,19 @@ import "openzeppelin-contracts/contracts/access/Ownable.sol";
 contract Offer is IOffer, Ownable {
 
     ILinkedUp factory;
-    uint256 public bounty;
-    uint256 public minBet;
-    uint256 public expirationTime;
-    uint16 public numberOfWinners;
-    bytes32 public data;
-    bool reclaimed;
+    uint256 public bounty;  // The amount of ether successful matchmakers receive in wei
+    uint256 public minBet;  // The minimum amount of ether required for a bet in wei
+    uint256 public expirationTime;  // The block timestap after whih the offer expires/closes
+    uint16 public numberOfWinners;  // The amount of applicants the poster of the offer is going to select
+    bytes32 public data;  // A hash of the data of the offer description
+    bool reclaimed;  // true if no match was posted and the poster reclaimed their bounty
     
-    address[] proposed;
-    mapping(address => MatchData) public matchDataOf;
-    mapping(address => mapping(address => uint256)) public bets;
-    address[] winners;
+    address[] proposed;  // A list of all proposed applicants
+    mapping(address => MatchData) public matchDataOf;  // Data (total shares, total ether, etc.) for a specific applicant
+    mapping(address => mapping(address => uint256)) public bets;  // Maps matchmakers to a map of applicants and the matchmakers' stakes on them
+    address[] winners;  // The applicants selected by the offer poster
 
+    // Parameters for the calculation of the share prices (currently a simple constant product function like in an AMM)
     uint256 INITIAL_X;
     uint256 MAX_SHARES = 1_000_000;
     uint256 K;
@@ -58,23 +59,30 @@ contract Offer is IOffer, Ownable {
         require(factory.deployerOfApplicant(applicant) != address(0), "Applicant is not registered with the factory");
         require(!(matchDataOf[applicant].applicantAck && matchDataOf[applicant].posterAck), "Can't bet on applicants who where already selected for the offer");
         require(minShares > 0, "minShares cannot be zero");
+
+        // Calculate the amount of shares the sender receives for the ether attached to the message
         uint256 shares = calculateShares(matchDataOf[applicant].totalShares, matchDataOf[applicant].etherValue, msg.value);
-        require(shares >= minShares, "Slippage control");
+        require(shares >= minShares, "Slippage control");  // avoid frontrunning
+        uint256 etherValue = msg.value;
+
+        // Check whether this is the first time the applicant is proposed as a match for the offer
         if (matchDataOf[applicant].totalShares == 0) {
             proposed.push(applicant);
             // TODO: Integrate PUSH Protocol
         }
+        // Update the total amount of shares and ether bet on the applicant
         matchDataOf[applicant].totalShares += shares;
-        matchDataOf[applicant].etherValue += msg.value;
+        matchDataOf[applicant].etherValue += etherValue;
         bets[msg.sender][applicant] += shares;
 
-        // TODO: Consider adding some part of the bet to the bounty
-        (bool res,) = factory.VAULT().call{value: msg.value}("");
+        // Consider adding some part of the bet to the bounty
+        (bool res,) = factory.VAULT().call{value: etherValue}("");
         require(res);
+        emit Bet(applicant, address(this), msg.sender, shares, etherValue);
     }
 
     function calculateShares(uint256 totalShares, uint256 totalEther, uint256 etherIn) public view returns (uint256 shares) {
-        // TODO: Come up with a nicer formula
+        // A simple constant product formula X * Y = K = const
         shares = ((MAX_SHARES - totalShares) * etherIn) / (INITIAL_X + totalEther + etherIn);
     }
 
@@ -102,6 +110,7 @@ contract Offer is IOffer, Ownable {
         require(Ownable(applicant).owner() == msg.sender, "Only the applicant can accept an offer.");
         require(!matchDataOf[applicant].applicantAck, "Offer was already accepted");
         matchDataOf[applicant].applicantAck = true;
+        emit OfferAccepted(address(this), applicant);
         checkMatch(applicant);
     }
 
@@ -116,6 +125,7 @@ contract Offer is IOffer, Ownable {
             }
         }
         winners.push(applicant);
+        emit Match(address(this), applicant);
         // TODO: Inform both parties of the match via PUSH Protocol
     }
 
@@ -125,6 +135,7 @@ contract Offer is IOffer, Ownable {
         reclaimed = true;
         (bool res,) = receiver.call{value: bounty}("");
         require(res);
+        emit Reclaim(address(this), bounty);
     }
 
     function claimBounty(address payable receiver, address applicant) _isClosed public {
@@ -137,10 +148,12 @@ contract Offer is IOffer, Ownable {
         bets[msg.sender][applicant] = 0;
         (bool res,) = receiver.call{value: payout}("");
         require(res);
+        emit Claim(address(this), msg.sender, applicant, payout);
     }
 
     function isClosed() public view returns (bool) {
         return (expirationTime <= block.timestamp) || winners.length == numberOfWinners;
     }
 
+    receive() external payable{}
 }
