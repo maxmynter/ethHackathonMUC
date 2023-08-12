@@ -31,7 +31,7 @@ const Header = ({
   size?: number;
 }) => {
   return (
-    <div className="container mx-auto h-20 flex flex-col justify-center">
+    <div className="container mx-auto h-20 px-3 flex flex-col justify-center">
       <div className="flex flex-row justify-center w-full h-12">
         <div>
           <Image src="./linkedup.svg" width={150} height={80} alt="LinkedUp" />
