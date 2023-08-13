@@ -36,7 +36,7 @@ const MatchHeader = ({
     }
   };
   return (
-    <div className="flex flex-col justify-center items-center rounded-md shadow-md p-2">
+    <div className="flex flex-col justify-center items-center rounded-md shadow-md p-2 bg-white">
       <div className="flex flex-row justify-between items-center">
         <div className="mx-2">
           <label className="m-2">Stake: </label>
