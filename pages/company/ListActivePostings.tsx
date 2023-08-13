@@ -74,7 +74,7 @@ const JobListItemAbstract = ({
 }) => {
   return (
     <>
-      <a className="text-sky-500 m-3">{jobPosting.title}</a>
+      <a className="text-sky-600 m-3 font-bold">{jobPosting.title}</a>
       <div className="flex justify-between">
         <div className="flex flex-row">
           <div className="text-gray-500 m-3">
