@@ -17,9 +17,10 @@ const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {
 
   const LUaddress = "0x76200A7A3f647C64d7ec3ce0D2df2D5Ae804A81c";
 
-  const { address, connector, isConnected } = useAccount()
+  const { address, connector, isConnected } = useAccount();
 
-  const { config,
+  const {
+    config,
     error: prepareError,
     isError: isPrepareError,
   } = usePrepareContractWrite({
@@ -27,15 +28,17 @@ const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {
     abi: abi,
     functionName: "createApplicantProfileWithData",
     // Post some mock data for now
-    args: [["0x0123456789012345678901234567890001234567890123456789012345678901"]],
+    args: [
+      ["0x0123456789012345678901234567890001234567890123456789012345678901"],
+    ],
     account: address,
-  })
+  });
 
-  const { data, error, isError, write } = useContractWrite(config)
+  const { data, error, isError, write } = useContractWrite(config);
 
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash: data?.hash,
-  })
+  });
 
   const addRow = () => {
     setPortfolioRows([...portfolioRows, { title: "", link: "" }]);
@@ -63,7 +66,9 @@ const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {
     setSelfIntro("");
     setPortfolioRows([]);
     onSubmit();
-    write();
+    if (write) {
+      write();
+    }
     // Perform your search request logic here
   };
 

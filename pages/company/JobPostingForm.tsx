@@ -75,7 +75,9 @@ const JobPostingForm = () => {
   const handleSubmit = () => {
     console.log(usdAmount, ethAmount, jobDescription, jobTitle, companyName);
     try {
-      write();
+      if (write) {
+        write();
+      }
     } catch (error) {
       console.error(error);
     } finally {
