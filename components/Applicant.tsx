@@ -1,135 +1,135 @@
 import * as React from "react";
-import {
-  usePrepareContractWrite,
-  useContractWrite,
-} from "wagmi";
+import { usePrepareContractWrite, useContractWrite } from "wagmi";
 
-export const address = "0x1337"
+export const address = "0x1337";
 export const abi = [
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "previousOwner",
-        "type": "address"
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
       },
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
-      }
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
     ],
-    "name": "OwnershipTransferred",
-    "type": "event"
+    name: "OwnershipTransferred",
+    type: "event",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "bytes32[]",
-        "name": "_data",
-        "type": "bytes32[]"
-      }
+        internalType: "bytes32[]",
+        name: "_data",
+        type: "bytes32[]",
+      },
     ],
-    "name": "addData",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "addData",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "bytes32[]",
-        "name": "_data",
-        "type": "bytes32[]"
-      }
+        internalType: "bytes32[]",
+        name: "_data",
+        type: "bytes32[]",
+      },
     ],
-    "name": "invalidateData",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "invalidateData",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
-      }
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
+      },
     ],
-    "name": "isData",
-    "outputs": [
+    name: "isData",
+    outputs: [
       {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "owner",
-    "outputs": [
+    inputs: [],
+    name: "owner",
+    outputs: [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "renounceOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    inputs: [],
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
     ],
-    "name": "transferOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  }
-] as const
+    name: "transferOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+] as const;
 
 export function AddData() {
-  const [data] = React.useState('')
+  const [data] = React.useState("");
 
   const { config } = usePrepareContractWrite({
     address: address,
     abi: abi,
     functionName: "addData",
     // Mock data
-    args: [["0x01234567890123456789012345678900", "0x01234567890123456789012345678901"]]
-  })
+    args: [
+      [
+        "0x01234567890123456789012345678900",
+        "0x01234567890123456789012345678901",
+      ],
+    ],
+  });
 
   const { write } = useContractWrite(config);
 
   return (
     <form
       onSubmit={(e) => {
-        write?.()
+        if (write) {
+          write();
+        }
       }}
     >
-      <input
-        aria-label="Recipient"
-        placeholder="test"
-        value={data}
-      />
+      <input aria-label="Recipient" placeholder="test" value={data} />
       <button disabled={!data}>Send</button>
     </form>
-  )
+  );
 }
