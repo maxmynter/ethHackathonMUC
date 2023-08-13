@@ -54,8 +54,18 @@ Responsibilities:
   },
   {
     id: 2,
+    companyName: "LinkedIn",
     title: "UI/UX Designer",
     suggestions: 3,
+    searchQuery: `About Us:
+At [Company Name], innovation is our hallmark. We're on the lookout for a talented UI/UX Designer to join our inventive team. Our company's commitment to pioneering technology results in cutting-edge solutions that drive progress across diverse sectors.
+
+Role Overview:
+As a UI/UX Designer at [Company Name], your creative prowess will shape the user experience of our products and services. Collaborating with multifaceted teams, you'll transform concepts into intuitive interfaces, seamlessly blending aesthetics and functionality.
+
+Responsibilities:
+
+    Develop visually appealing user interfaces that prioritize user experience and brand identity.`,
     backedTokens: 0.87,
     bountyUSD: 3000,
     candidates: [candidatesByID.aliceJohnson, candidatesByID.bobWilliams],
@@ -63,7 +73,18 @@ Responsibilities:
   {
     id: 3,
     title: "Risk Analyst",
+    companyName: "FTX",
     suggestions: 5,
+    searchQuery: `About Us:
+Join [Company Name], a trailblazing force committed to innovation. We're currently seeking a skilled Risk Analyst to complement our team. Our company's dedication to pushing boundaries yields pioneering solutions that catalyze progress in diverse industries.
+
+Role Overview:
+As a Risk Analyst at [Company Name], your expertise will play a pivotal role in assessing and mitigating potential risks. Collaborating closely with various teams, you'll contribute to informed decision-making and help secure the future success of our endeavors.
+
+Responsibilities:
+
+    Identify, evaluate, and manage risks to safeguard projects and initiatives.
+    Collaborate with stakeholders to implement strategies that minimize potential negative impacts.`,
     backedTokens: 1.17,
     bountyUSD: 4200,
     candidates: [candidatesByID.aliceJohnson, candidatesByID.bobWilliams],

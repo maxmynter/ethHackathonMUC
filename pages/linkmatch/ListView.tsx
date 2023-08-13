@@ -23,7 +23,7 @@ const ListView = ({
       <h3 className="font-bold text-2xl text-center">{title}</h3>
 
       <div className="flex flex-col">
-        {data.map((item: ExpandedJobPosting | Candidate) => {
+        {data?.map((item: ExpandedJobPosting | Candidate) => {
           if (typeOfData === "Job") {
             const job = item as ExpandedJobPosting;
             const setSelectedJob = setSelected as Dispatch<

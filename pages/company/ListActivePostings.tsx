@@ -53,7 +53,7 @@ const DisplayCandidate = ({ candidate }: { candidate: Candidate }) => {
           />
         </div>
         <Link
-          href={candidate.portfolioLink}
+          href={"https://github.com/maxmynter/"}
           className="text-blue-500 pl-2 pr-2"
         >
           To Portfolio

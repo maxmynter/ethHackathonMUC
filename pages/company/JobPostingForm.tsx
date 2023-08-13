@@ -48,7 +48,7 @@ const JobPostingForm = () => {
 
   const usdToEthConversionRate = USD_TO_ETH;
 
-  const handleUsdChange = (event) => {
+  const handleUsdChange = (event: any) => {
     const newUsdAmount = event.target.value;
     setUsdAmount(newUsdAmount);
     setEthAmount(
@@ -56,7 +56,7 @@ const JobPostingForm = () => {
     );
   };
 
-  const handleEthChange = (event) => {
+  const handleEthChange = (event: any) => {
     const newEthAmount = event.target.value;
     setEthAmount(newEthAmount);
     setUsdAmount(
@@ -65,8 +65,8 @@ const JobPostingForm = () => {
   };
 
   const clearForm = () => {
-    setUsdAmount(0);
-    setEthAmount(0);
+    setUsdAmount(String(0));
+    setEthAmount(String(0));
     setJobDescription("");
     setJobTitle("");
     setCompanyName("");
@@ -140,7 +140,7 @@ const JobPostingForm = () => {
             name="body"
             value={jobDescription}
             onChange={(event) => setJobDescription(event.target.value)}
-            rows="5"
+            rows={Number("5")}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
             placeholder="Enter job description..."
           ></textarea>
