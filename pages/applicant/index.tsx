@@ -3,7 +3,6 @@ import Header from "../../components/header/header";
 import { JobPosting } from "../../types/global";
 import { CreateApplicantProfileWithData } from "../../components/LinkedUp";
 
-
 const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {
   const [portfolioRows, setPortfolioRows] = useState([{ title: "", link: "" }]);
   const [jobTitle, setJobTitle] = useState("");
@@ -39,13 +38,13 @@ const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {
   };
 
   return (
-    <div className=" max-w-2xl mx-auto mt-8 p-4 bg-white shadow-md rounded-lg mb-11">
+    <div className=" max-w-2xl mx-auto mt-8 p-6 bg-white shadow-md rounded-lg mb-11">
       <h2 className="text-xl font-semibold mb-4">
         How does your dream job look like?
       </h2>
       <form>
         <label htmlFor="jobTitle" className="block font-medium mb-2">
-          What Role are you looking for?
+          What role are you looking for?
         </label>
         <input
           type="text"
@@ -65,7 +64,7 @@ const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {
           className="w-full mb-4 p-2 border rounded"
         />
         <label className="block font-medium mb-2">
-          Add Links to your Work:
+          Add links to your work:
         </label>
         {portfolioRows.map((row, index) => (
           <div key={index} className="flex mb-2">
@@ -107,7 +106,7 @@ const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {
           id="mail"
           className="w-full mb-4 p-2 border rounded"
         />
-        w{" "}
+
         <button
           type="button"
           className="bg-sky-500 hover:bg-sky-600 text-white w-full rounded py-2 px-4 mt-4 font-bold"
