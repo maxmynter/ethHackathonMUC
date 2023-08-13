@@ -11,7 +11,7 @@ const SubHeaderButton = ({
 }) => {
   return (
     <div
-      className={`flex font-bold flex-col justify-center mx-2 drop-shadow-lg rounded-lg ${
+      className={`flex font-bold flex-col justify-center mx-2 drop-shadow-lg cursor-pointer rounded-lg ${
         isActive
           ? "text-white bg-sky-700 hover:bg-sky-700"
           : "bg-white hover:bg-sky-500  hover:text-white"
@@ -33,22 +33,20 @@ const SubHeader = ({
   setHeaderState: Dispatch<SetStateAction<string>>;
 }) => {
   return (
-    <div className="w-full flex ">
-      <div className="w-64 justify-center pv-2 pl-10">
-        <div className="flex flex-row justify-between">
-          {statesArray.map((stte) => {
-            return (
-              <SubHeaderButton
-                key={stte}
-                text={stte}
-                isActive={stte === headerState}
-                onClick={() => {
-                  setHeaderState(stte);
-                }}
-              />
-            );
-          })}
-        </div>
+    <div className="w-full">
+      <div className="flex flex-row justify-center">
+        {statesArray.map((stte) => {
+          return (
+            <SubHeaderButton
+              key={stte}
+              text={stte}
+              isActive={stte === headerState}
+              onClick={() => {
+                setHeaderState(stte);
+              }}
+            />
+          );
+        })}
       </div>
     </div>
   );

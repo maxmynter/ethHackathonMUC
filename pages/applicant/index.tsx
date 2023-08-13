@@ -52,7 +52,6 @@ const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {
           id="jobTitle"
           className="w-full mb-4 p-2 border rounded"
         />
-
         <label htmlFor="description" className="block font-medium mb-2">
           Introduce yourself briefly (max.250 words):
         </label>
@@ -98,7 +97,6 @@ const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {
         >
           Add New Row
         </button>
-
         <label htmlFor="mail" className="block font-medium mb-2">
           Contact E-Mail:
         </label>
@@ -107,12 +105,13 @@ const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {
           id="mail"
           className="w-full mb-4 p-2 border rounded"
         />
+        w{" "}
         <button
           type="button"
-          className="bg-sky-500 text-white w-full rounded py-2 px-4 mt-4"
+          className="bg-sky-500 hover:bg-sky-600 text-white w-full rounded py-2 px-4 mt-4 font-bold"
           onClick={handleSubmit}
         >
-          Submit Search Request
+          Create My Profile
         </button>
       </form>
     </div>
