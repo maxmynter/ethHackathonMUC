@@ -1,5 +1,4 @@
 // Initialize ethers.js and wagmi dependencies
-import { ethers } from "ethers";
 import * as React from "react";
 import {
   useAccount,
@@ -12,464 +11,465 @@ const LUaddress = "0x76200A7A3f647C64d7ec3ce0D2df2D5Ae804A81c";
 
 const abi = [
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address payable",
-        "name": "_vault",
-        "type": "address"
+        internalType: "address payable",
+        name: "_vault",
+        type: "address",
       },
       {
-        "internalType": "uint256",
-        "name": "_proposalFee",
-        "type": "uint256"
+        internalType: "uint256",
+        name: "_proposalFee",
+        type: "uint256",
       },
       {
-        "internalType": "uint256",
-        "name": "_bounty",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "_bounty",
+        type: "uint256",
+      },
     ],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
+    stateMutability: "nonpayable",
+    type: "constructor",
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "deployer",
-        "type": "address"
+        indexed: true,
+        internalType: "address",
+        name: "deployer",
+        type: "address",
       },
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "applicantProfile",
-        "type": "address"
-      }
+        indexed: true,
+        internalType: "address",
+        name: "applicantProfile",
+        type: "address",
+      },
     ],
-    "name": "ApplicantProfileCreation",
-    "type": "event"
+    name: "ApplicantProfileCreation",
+    type: "event",
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "_from",
-        "type": "uint256"
+        indexed: false,
+        internalType: "uint256",
+        name: "_from",
+        type: "uint256",
       },
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "_to",
-        "type": "uint256"
+        indexed: false,
+        internalType: "uint256",
+        name: "_to",
+        type: "uint256",
       },
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "by",
-        "type": "address"
-      }
+        indexed: true,
+        internalType: "address",
+        name: "by",
+        type: "address",
+      },
     ],
-    "name": "MinimumMatchProposalFeeChanged",
-    "type": "event"
+    name: "MinimumMatchProposalFeeChanged",
+    type: "event",
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "_from",
-        "type": "uint256"
+        indexed: false,
+        internalType: "uint256",
+        name: "_from",
+        type: "uint256",
       },
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "_to",
-        "type": "uint256"
+        indexed: false,
+        internalType: "uint256",
+        name: "_to",
+        type: "uint256",
       },
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "by",
-        "type": "address"
-      }
+        indexed: true,
+        internalType: "address",
+        name: "by",
+        type: "address",
+      },
     ],
-    "name": "MinimumOfferBountyChanged",
-    "type": "event"
+    name: "MinimumOfferBountyChanged",
+    type: "event",
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "poster",
-        "type": "address"
+        indexed: true,
+        internalType: "address",
+        name: "poster",
+        type: "address",
       },
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "offer",
-        "type": "address"
+        indexed: true,
+        internalType: "address",
+        name: "offer",
+        type: "address",
       },
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "bounty",
-        "type": "uint256"
+        indexed: false,
+        internalType: "uint256",
+        name: "bounty",
+        type: "uint256",
       },
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "minBet",
-        "type": "uint256"
+        indexed: false,
+        internalType: "uint256",
+        name: "minBet",
+        type: "uint256",
       },
       {
-        "indexed": false,
-        "internalType": "uint16",
-        "name": "numberOfWinners",
-        "type": "uint16"
+        indexed: false,
+        internalType: "uint16",
+        name: "numberOfWinners",
+        type: "uint16",
       },
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "duration",
-        "type": "uint256"
-      }
+        indexed: false,
+        internalType: "uint256",
+        name: "duration",
+        type: "uint256",
+      },
     ],
-    "name": "OfferCreation",
-    "type": "event"
+    name: "OfferCreation",
+    type: "event",
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "previousOwner",
-        "type": "address"
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
       },
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
-      }
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
     ],
-    "name": "OwnershipTransferred",
-    "type": "event"
+    name: "OwnershipTransferred",
+    type: "event",
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "_from",
-        "type": "address"
+        indexed: true,
+        internalType: "address",
+        name: "_from",
+        type: "address",
       },
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "_to",
-        "type": "address"
+        indexed: true,
+        internalType: "address",
+        name: "_to",
+        type: "address",
       },
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "by",
-        "type": "address"
-      }
+        indexed: true,
+        internalType: "address",
+        name: "by",
+        type: "address",
+      },
     ],
-    "name": "VaultChanged",
-    "type": "event"
+    name: "VaultChanged",
+    type: "event",
   },
   {
-    "inputs": [],
-    "name": "MAX_DURATION",
-    "outputs": [
+    inputs: [],
+    name: "MAX_DURATION",
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "MIN_DURATION",
-    "outputs": [
+    inputs: [],
+    name: "MIN_DURATION",
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "MIN_MATCH_PROPOSAL_FEE",
-    "outputs": [
+    inputs: [],
+    name: "MIN_MATCH_PROPOSAL_FEE",
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "MIN_OFFER_BOUNTY",
-    "outputs": [
+    inputs: [],
+    name: "MIN_OFFER_BOUNTY",
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "VAULT",
-    "outputs": [
+    inputs: [],
+    name: "VAULT",
+    outputs: [
       {
-        "internalType": "address payable",
-        "name": "",
-        "type": "address"
-      }
+        internalType: "address payable",
+        name: "",
+        type: "address",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "_fee",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "_fee",
+        type: "uint256",
+      },
     ],
-    "name": "changeMinimumMatchProposalFee",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "changeMinimumMatchProposalFee",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "_bounty",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "_bounty",
+        type: "uint256",
+      },
     ],
-    "name": "changeMinimumOfferBounty",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "changeMinimumOfferBounty",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address payable",
-        "name": "_vault",
-        "type": "address"
-      }
+        internalType: "address payable",
+        name: "_vault",
+        type: "address",
+      },
     ],
-    "name": "changeVaultAddress",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "changeVaultAddress",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "createApplicantProfile",
-    "outputs": [
+    inputs: [],
+    name: "createApplicantProfile",
+    outputs: [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
     ],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "bytes32[]",
-        "name": "_data",
-        "type": "bytes32[]"
-      }
+        internalType: "bytes32[]",
+        name: "_data",
+        type: "bytes32[]",
+      },
     ],
-    "name": "createApplicantProfileWithData",
-    "outputs": [
+    name: "createApplicantProfileWithData",
+    outputs: [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
     ],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "bytes32",
-        "name": "_data",
-        "type": "bytes32"
+        internalType: "bytes32",
+        name: "_data",
+        type: "bytes32",
       },
       {
-        "internalType": "uint256",
-        "name": "_bounty",
-        "type": "uint256"
+        internalType: "uint256",
+        name: "_bounty",
+        type: "uint256",
       },
       {
-        "internalType": "uint256",
-        "name": "_minBet",
-        "type": "uint256"
+        internalType: "uint256",
+        name: "_minBet",
+        type: "uint256",
       },
       {
-        "internalType": "uint16",
-        "name": "_nWinners",
-        "type": "uint16"
+        internalType: "uint16",
+        name: "_nWinners",
+        type: "uint16",
       },
       {
-        "internalType": "uint256",
-        "name": "_duration",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "_duration",
+        type: "uint256",
+      },
     ],
-    "name": "createOffer",
-    "outputs": [
+    name: "createOffer",
+    outputs: [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
     ],
-    "stateMutability": "payable",
-    "type": "function"
+    stateMutability: "payable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "offer",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "offer",
+        type: "uint256",
+      },
     ],
-    "name": "deleteOffer",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "deleteOffer",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
     ],
-    "name": "deployerOfApplicant",
-    "outputs": [
+    name: "deployerOfApplicant",
+    outputs: [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "numberOfOffers",
-    "outputs": [
+    inputs: [],
+    name: "numberOfOffers",
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
     ],
-    "name": "offers",
-    "outputs": [
+    name: "offers",
+    outputs: [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "owner",
-    "outputs": [
+    inputs: [],
+    name: "owner",
+    outputs: [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "renounceOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    inputs: [],
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
     ],
-    "name": "transferOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "transferOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "stateMutability": "payable",
-    "type": "receive"
-  }
+    stateMutability: "payable",
+    type: "receive",
+  },
 ] as const;
 
 export function CreateApplicantProfileWithData() {
-  const { address, connector, isConnected } = useAccount()
+  const { address, connector, isConnected } = useAccount();
 
-  const { config,
+  const {
+    config,
     error: prepareError,
     isError: isPrepareError,
   } = usePrepareContractWrite({
@@ -477,26 +477,30 @@ export function CreateApplicantProfileWithData() {
     abi: abi,
     functionName: "createApplicantProfileWithData",
     // Post some mock data for now
-    args: [["0x0123456789012345678901234567890001234567890123456789012345678901"]],
+    args: [
+      ["0x0123456789012345678901234567890001234567890123456789012345678901"],
+    ],
     account: address,
-  })
+  });
 
-  const { data, error, isError, write } = useContractWrite(config)
+  const { data, error, isError, write } = useContractWrite(config);
 
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash: data?.hash,
-  })
+  });
 
   return (
     <div>
       <button disabled={!write || isLoading} onClick={() => write()}>
-        {isLoading ? 'Creating Profile...' : 'Create Profile'}
+        {isLoading ? "Creating Profile..." : "Create Profile"}
       </button>
       {isSuccess && (
         <div>
           Successfully created an applicant profile!
           <div>
-            <a href={`https://sepolia.etherscan.io/tx/${data?.hash}`}>Etherscan</a>
+            <a href={`https://sepolia.etherscan.io/tx/${data?.hash}`}>
+              Etherscan
+            </a>
           </div>
         </div>
       )}
@@ -504,13 +508,14 @@ export function CreateApplicantProfileWithData() {
         <div>Error: {(prepareError || error)?.message}</div>
       )}
     </div>
-  )
+  );
 }
 
 export function CreateOffer() {
-  const { address, connector, isConnected } = useAccount()
+  const { address, connector, isConnected } = useAccount();
 
-  const { config,
+  const {
+    config,
     error: prepareError,
     isError: isPrepareError,
   } = usePrepareContractWrite({
@@ -518,27 +523,35 @@ export function CreateOffer() {
     abi: abi,
     functionName: "createOffer",
     // Post some mock data for now
-    args: ["0x0123456789012345678901234567890001234567890123456789012345678901", BigInt(1000000000000), BigInt(10000000000), 1, BigInt(10000000)],
+    args: [
+      "0x0123456789012345678901234567890001234567890123456789012345678901",
+      BigInt(1000000000000),
+      BigInt(10000000000),
+      1,
+      BigInt(10000000),
+    ],
     account: address,
-    value: BigInt(1000000000000)
-  })
+    value: BigInt(1000000000000),
+  });
 
-  const { data, error, isError, write } = useContractWrite(config)
+  const { data, error, isError, write } = useContractWrite(config);
 
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash: data?.hash,
-  })
+  });
 
   return (
     <div>
       <button disabled={!write || isLoading} onClick={() => write()}>
-        {isLoading ? 'Posting Offer...' : 'Post Offer'}
+        {isLoading ? "Posting Offer..." : "Post Offer"}
       </button>
       {isSuccess && (
         <div>
           Successfully posted a job offer!
           <div>
-            <a href={`https://sepolia.etherscan.io/tx/${data?.hash}`}>Etherscan</a>
+            <a href={`https://sepolia.etherscan.io/tx/${data?.hash}`}>
+              Etherscan
+            </a>
           </div>
         </div>
       )}
@@ -546,5 +559,5 @@ export function CreateOffer() {
         <div>Error: {(prepareError || error)?.message}</div>
       )}
     </div>
-  )
+  );
 }
