@@ -12,7 +12,7 @@ const HeaderButton = ({
   const path = usePathname();
   return (
     <div
-      className={`flex flex-col justify-center mx-2 drop-shadow-lg rounded-lg ${
+      className={`flex flex-col justify-center mx-2 px-1 drop-shadow-lg rounded-lg ${
         path === buttonInfo.linkTo
           ? "text-white bg-sky-700 hover:bg-sky-700"
           : "bg-white hover:bg-sky-500  hover:text-white"
