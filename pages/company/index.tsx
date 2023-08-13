@@ -1,11 +1,11 @@
 import Header from "../../components/header/header";
 import SubHeader from "../../components/header/subheader";
 import ActiveJobPostings from "./ListActivePostings";
-import JobPostingForm from "./jobPostingForm";
+import JobPostingForm from "./JobPostingForm";
 import { useState } from "react";
-import { CreateOffer } from "../../components/LinkedUp";
 
 const companyViewStatesArray = ["New", "Active", "Archive"];
+
 
 const CompanyView = () => {
   const [companyViewState, setCompanyViewState] = useState("Active");
@@ -25,7 +25,6 @@ const CompanyView = () => {
       case "New":
         return (
           <div>
-          <CreateOffer />
         <JobPostingForm />
         </div>);
       case "Active":

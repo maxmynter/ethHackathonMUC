@@ -14,6 +14,7 @@ import {
   polygonZkEvmTestnet,
 } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
+import { alchemyProvider } from '@wagmi/core/providers/alchemy'
 import React from "react";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
@@ -22,12 +23,11 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
     polygon,
     optimism,
     arbitrum,
-    zora,
     sepolia,
-    polygonZkEvmTestnet,
+    //polygonZkEvmTestnet,
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [goerli] : []),
   ],
-  [publicProvider()]
+  [alchemyProvider({apiKey: "SdRjA2hFH1sEryBMavf7DU4FkylmhY2K"})]
 );
 
 const { connectors } = getDefaultWallets({
