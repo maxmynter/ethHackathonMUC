@@ -4,6 +4,17 @@ import { USD_TO_ETH } from "../../utils/usdToEth";
 import { Candidate, ExpandedJobPosting } from "../../types/global";
 import mockData from "../../utils/mockData";
 import ExpandCollapseToggle from "../../components/header/toggle";
+
+import {
+  useAccount,
+  usePrepareContractWrite,
+  useContractWrite,
+  useContractRead,
+  useWaitForTransaction,
+} from "wagmi";
+
+const abi = require("./abi.json");
+
 const mockJobPostings = mockData.jobPostings;
 
 const DisplaySingleScore = ({
@@ -153,6 +164,12 @@ const ActiveJobPostings = () => {
   const [expandedJobId, setExpandedJobId] = useState<number | null>(null);
   const [jobPostings, setJobPostings] = useState<ExpandedJobPosting[]>([]);
 
+  const { data, isError, isLoading } = useContractRead({
+    address: "0x2D10d50C30e57B4fcD3aB26B5FC2669336CE5364",
+    abi: require("./abi.json"),
+    functionName: "data",
+  });
+
   const handleJobClick = (jobId: number) => {
     if (expandedJobId === jobId) {
       setExpandedJobId(null);
@@ -162,13 +179,14 @@ const ActiveJobPostings = () => {
   };
 
   const onSelectAndCloseSearch = () => {
-    // Handle selcet Candidates.
     setExpandedJobId(null);
   };
 
   useEffect(() => {
     setJobPostings(mockJobPostings);
   }, []);
+
+  console.log(data);
 
   return (
     <div className="container mx-auto mt-8">
