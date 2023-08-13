@@ -1,12 +1,41 @@
 import React, { useState } from "react";
 import Header from "../../components/header/header";
 import { JobPosting } from "../../types/global";
-import { CreateApplicantProfileWithData } from "../../components/LinkedUp";
+import {
+  useAccount,
+  usePrepareContractWrite,
+  useContractWrite,
+  useWaitForTransaction,
+} from "wagmi";
 
 const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {
   const [portfolioRows, setPortfolioRows] = useState([{ title: "", link: "" }]);
   const [jobTitle, setJobTitle] = useState("");
   const [selfIntro, setSelfIntro] = useState("");
+
+  const abi = require("./../company/abi.json");
+
+  const LUaddress = "0x76200A7A3f647C64d7ec3ce0D2df2D5Ae804A81c";
+
+  const { address, connector, isConnected } = useAccount()
+
+  const { config,
+    error: prepareError,
+    isError: isPrepareError,
+  } = usePrepareContractWrite({
+    address: LUaddress,
+    abi: abi,
+    functionName: "createApplicantProfileWithData",
+    // Post some mock data for now
+    args: [["0x0123456789012345678901234567890001234567890123456789012345678901"]],
+    account: address,
+  })
+
+  const { data, error, isError, write } = useContractWrite(config)
+
+  const { isLoading, isSuccess } = useWaitForTransaction({
+    hash: data?.hash,
+  })
 
   const addRow = () => {
     setPortfolioRows([...portfolioRows, { title: "", link: "" }]);
@@ -34,6 +63,7 @@ const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {
     setSelfIntro("");
     setPortfolioRows([]);
     onSubmit();
+    write();
     // Perform your search request logic here
   };
 
@@ -197,7 +227,6 @@ const ApplicantView = () => {
   return (
     <>
       <Header />
-      <CreateApplicantProfileWithData />
       {applicationSubmitted ? (
         <>
           {showSuccessModal && (
