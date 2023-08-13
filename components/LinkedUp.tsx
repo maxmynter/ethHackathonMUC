@@ -10,7 +10,7 @@ import {
   useWaitForTransaction,
 } from "wagmi";
 
-const LUaddress = "0x76200A7A3f647C64d7ec3ce0D2df2D5Ae804A81c";
+const LUaddress = "0xF701D351282FC62Aa20951a509BE462C7530fBD3";
 
 const abi = [
   {
