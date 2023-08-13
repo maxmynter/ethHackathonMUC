@@ -3,6 +3,7 @@ import SubHeader from "../../components/header/subheader";
 import ActiveJobPostings from "./ListActivePostings";
 import JobPostingForm from "./jobPostingForm";
 import { useState } from "react";
+import { CreateOffer } from "../../components/LinkedUp";
 
 const companyViewStatesArray = ["New", "Active", "Archive"];
 
@@ -22,7 +23,11 @@ const CompanyView = () => {
   const RenderSubpage = ({ viewState }: { viewState: string }) => {
     switch (viewState) {
       case "New":
-        return <JobPostingForm />;
+        return (
+          <div>
+          <CreateOffer />
+        <JobPostingForm />
+        </div>);
       case "Active":
         return <ActiveJobPostings />;
       case "Archive":

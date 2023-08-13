@@ -40,9 +40,9 @@ contract Offer is IOffer, Ownable {
         factory = ILinkedUp(_factory);
         require((_bounty >= factory.MIN_OFFER_BOUNTY() && _bounty >= _minBet), "Bounty is too low");
         require(_minBet > factory.MIN_MATCH_PROPOSAL_FEE(), "Minimum bet is too low");
-        require(expirationTime > block.timestamp, "Expiration time has to be in the future");
+        require(_expirationTime > block.timestamp, "Expiration time has to be in the future");
         require(_nWinners > 0, "Must select at least one applicant");
-        require(data != 0, "Data hash cannot be zero");
+        require(_data != 0, "Data hash cannot be zero");
 
         bounty = _bounty;
         minBet = _minBet;

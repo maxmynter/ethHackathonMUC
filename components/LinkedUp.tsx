@@ -10,7 +10,7 @@ import {
   useWaitForTransaction,
 } from "wagmi";
 
-const LUaddress = "0x103094bCfe6e69F3a0Ba1B61F447618579A17290";
+const LUaddress = "0x76200A7A3f647C64d7ec3ce0D2df2D5Ae804A81c";
 
 const abi = [
   {
@@ -496,6 +496,47 @@ export function CreateApplicantProfileWithData() {
       {isSuccess && (
         <div>
           Successfully created an applicant profile!
+          <div>
+            <a href={`https://sepolia.etherscan.io/tx/${data?.hash}`}>Etherscan</a>
+          </div>
+        </div>
+      )}
+      {(isPrepareError || isError) && (
+        <div>Error: {(prepareError || error)?.message}</div>
+      )}
+    </div>
+  )
+}
+
+export function CreateOffer() {
+  const { address, connector, isConnected } = useAccount()
+
+  const { config,
+    error: prepareError,
+    isError: isPrepareError,
+  } = usePrepareContractWrite({
+    address: LUaddress,
+    abi: abi,
+    functionName: "createOffer",
+    args: ["0x0123456789012345678901234567890001234567890123456789012345678901", BigInt(1000000000000), BigInt(10000000000), 1, BigInt(10000000)],
+    account: address,
+    value: BigInt(1000000000000)
+    })
+
+  const { data, error, isError, write } = useContractWrite(config)
+
+  const { isLoading, isSuccess } = useWaitForTransaction({
+    hash: data?.hash,
+  })
+
+  return (
+    <div>
+      <button disabled={!write || isLoading} onClick={() => write()}>
+        {isLoading ? 'Posting Offer...' : 'Post Offer'}
+      </button>
+      {isSuccess && (
+        <div>
+          Successfully posted a job offer!
           <div>
             <a href={`https://sepolia.etherscan.io/tx/${data?.hash}`}>Etherscan</a>
           </div>
