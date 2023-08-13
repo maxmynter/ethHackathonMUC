@@ -54,7 +54,7 @@ const Home: NextPage = () => {
               emoji="💁"
               colorOverlay="bg-white/50"
               colorUnderlay="bg-gradient-to-b from-fuchsia-300 to-pink-600"
-              text="Crowd-source the best matches for each position and save days of work."
+              text="Crowd-source the best matches for each position and save days of work"
               footer="I want to fill a position"
             />
             <HeroBox
@@ -62,7 +62,7 @@ const Home: NextPage = () => {
               colorOverlay="bg-white/50"
               colorUnderlay="bg-gradient-to-b from-blue-300 to-purple-600"
               emoji="🤑"
-              text="Earn flexible income on your terms by matching open positions with job seekers"
+              text="Earn income on your terms by matching open positions with job seekers"
               footer="Make money now!"
             />
             <HeroBox
