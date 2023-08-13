@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Header from "../../components/header/header";
 import { JobPosting } from "../../types/global";
+import { CreateApplicantProfileWithData } from "../../components/LinkedUp";
+
 
 const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {
   const [portfolioRows, setPortfolioRows] = useState([{ title: "", link: "" }]);
@@ -188,6 +190,7 @@ const ApplicantView = () => {
   return (
     <>
       <Header />
+      <CreateApplicantProfileWithData />
       {applicationSubmitted ? (
         <>
           {showSuccessModal && (

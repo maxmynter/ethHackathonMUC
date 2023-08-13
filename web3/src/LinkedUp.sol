@@ -30,7 +30,6 @@ contract LinkedUp is ILinkedUp, Ownable {
 
     function createApplicantProfile() public returns (address) {
         Applicant applicant = new Applicant();
-        applicant.transferOwnership(msg.sender);
         deployerOfApplicant[address(applicant)] = msg.sender;
         emit ApplicantProfileCreation(msg.sender, address(applicant));
         return address(applicant);
@@ -51,7 +50,6 @@ contract LinkedUp is ILinkedUp, Ownable {
         require(msg.value == _bounty, "msg.value != bounty");
         // The rest of the parameters are validated in Offer.sol
         Offer offer = new Offer{value: msg.value}(address(this), _data, _bounty, _minBet, _nWinners, block.timestamp + _duration);
-        offer.transferOwnership(msg.sender);
         offersOf[msg.sender].push(offers.length);
         offers.push(address(offer));
         emit OfferCreation(msg.sender, address(offer), _bounty, _minBet, _nWinners, _duration);

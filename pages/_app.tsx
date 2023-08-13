@@ -10,6 +10,8 @@ import {
   optimism,
   polygon,
   zora,
+  sepolia,
+  polygonZkEvmTestnet,
 } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import React from "react";
@@ -21,6 +23,8 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
     optimism,
     arbitrum,
     zora,
+    sepolia,
+    polygonZkEvmTestnet,
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [goerli] : []),
   ],
   [publicProvider()]
