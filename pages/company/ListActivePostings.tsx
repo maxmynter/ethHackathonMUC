@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import { USD_TO_ETH } from "../../utils/usdToEth";
 import { Candidate, ExpandedJobPosting } from "../../types/global";
 import mockData from "../../utils/mockData";
@@ -50,9 +51,12 @@ const DisplayCandidate = ({ candidate }: { candidate: Candidate }) => {
             backersCount={candidate.backersCount}
           />
         </div>
-        <a href={candidate.portfolioLink} className="text-blue-500 pl-2 pr-2">
+        <Link
+          href={candidate.portfolioLink}
+          className="text-blue-500 pl-2 pr-2"
+        >
           To Portfolio
-        </a>
+        </Link>
       </div>
     </li>
   );
@@ -168,32 +172,34 @@ const ActiveJobPostings = () => {
 
   return (
     <div className="container mx-auto mt-8">
-      <h1 className="text-2xl font-bold mb-4">Open Job Postings</h1>
-      <ul>
-        {jobPostings.map((jobPosting) => (
-          <li
-            key={jobPosting.id}
-            className="p-4 border mb-4 cursor-pointer hover:bg-gray-100 rounded-md"
-            onClick={() => {
-              if (expandedJobId !== jobPosting.id) {
-                handleJobClick(jobPosting.id);
-              }
-            }}
-          >
-            <JobListItemAbstract
-              jobPosting={jobPosting}
-              expandedJobId={expandedJobId}
-              handleJobClick={handleJobClick}
-            />
-            {expandedJobId === jobPosting.id && (
-              <JobListItemDetailView
+      <div className="flex flex-col justify-center items-center rounded-md shadow-md p-4 bg-white">
+        <h1 className="text-2xl w-full font-bold mb-4">Open Job Postings</h1>
+        <ul className="w-full">
+          {jobPostings.map((jobPosting) => (
+            <li
+              key={jobPosting.id}
+              className="p-4 w-full border mb-4 cursor-pointer hover:bg-gray-100 rounded-md"
+              onClick={() => {
+                if (expandedJobId !== jobPosting.id) {
+                  handleJobClick(jobPosting.id);
+                }
+              }}
+            >
+              <JobListItemAbstract
                 jobPosting={jobPosting}
-                onSelectAndCloseSearch={onSelectAndCloseSearch}
+                expandedJobId={expandedJobId}
+                handleJobClick={handleJobClick}
               />
-            )}
-          </li>
-        ))}
-      </ul>
+              {expandedJobId === jobPosting.id && (
+                <JobListItemDetailView
+                  jobPosting={jobPosting}
+                  onSelectAndCloseSearch={onSelectAndCloseSearch}
+                />
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
