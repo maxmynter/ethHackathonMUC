@@ -491,7 +491,14 @@ export function CreateApplicantProfileWithData() {
 
   return (
     <div>
-      <button disabled={!write || isLoading} onClick={() => write()}>
+      <button
+        disabled={!write || isLoading}
+        onClick={() => {
+          if (write) {
+            write();
+          }
+        }}
+      >
         {isLoading ? "Creating Profile..." : "Create Profile"}
       </button>
       {isSuccess && (
@@ -542,7 +549,14 @@ export function CreateOffer() {
 
   return (
     <div>
-      <button disabled={!write || isLoading} onClick={() => write()}>
+      <button
+        disabled={!write || isLoading}
+        onClick={() => {
+          if (write) {
+            write();
+          }
+        }}
+      >
         {isLoading ? "Posting Offer..." : "Post Offer"}
       </button>
       {isSuccess && (
