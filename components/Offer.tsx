@@ -1,11 +1,8 @@
-import { ethers } from "ethers";
 import * as React from "react";
 import {
   useAccount,
-  useWalletClient,
   usePrepareContractWrite,
   useContractWrite,
-  useContractRead,
   useWaitForTransaction,
 } from "wagmi";
 
@@ -561,6 +558,7 @@ export const abi = [
       address: OFaddress,
       abi: abi,
       functionName: "buyShares",
+      // Mock data
       args: ["0xb93cdcc4280bd94b5c85d912fF8961015456D3d0", BigInt(7)],
       account: address,
       value: BigInt(10000000000)

@@ -3,10 +3,8 @@ import { ethers } from "ethers";
 import * as React from "react";
 import {
   useAccount,
-  useWalletClient,
   usePrepareContractWrite,
   useContractWrite,
-  useContractRead,
   useWaitForTransaction,
 } from "wagmi";
 
@@ -478,9 +476,10 @@ export function CreateApplicantProfileWithData() {
     address: LUaddress,
     abi: abi,
     functionName: "createApplicantProfileWithData",
+    // Post some mock data for now
     args: [["0x0123456789012345678901234567890001234567890123456789012345678901"]],
     account: address,
-    })
+  })
 
   const { data, error, isError, write } = useContractWrite(config)
 
@@ -518,10 +517,11 @@ export function CreateOffer() {
     address: LUaddress,
     abi: abi,
     functionName: "createOffer",
+    // Post some mock data for now
     args: ["0x0123456789012345678901234567890001234567890123456789012345678901", BigInt(1000000000000), BigInt(10000000000), 1, BigInt(10000000)],
     account: address,
     value: BigInt(1000000000000)
-    })
+  })
 
   const { data, error, isError, write } = useContractWrite(config)
 
