@@ -4,6 +4,9 @@ import { USD_TO_ETH } from "../../utils/usdToEth";
 const JobPostingForm = () => {
   const [usdAmount, setUsdAmount] = useState("");
   const [ethAmount, setEthAmount] = useState("");
+  const [jobDescription, setJobDescription] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [companyName, setCompanyName] = useState("");
 
   const usdToEthConversionRate = USD_TO_ETH;
 
@@ -23,6 +26,16 @@ const JobPostingForm = () => {
     );
   };
 
+  const handleSubmit = () => {
+    console.log("Handle Submit of FOrm");
+    console.log(usdAmount, ethAmount, jobDescription, jobTitle, companyName);
+    setUsdAmount(0);
+    setEthAmount(0);
+    setJobDescription("");
+    setJobTitle("");
+    setCompanyName("");
+  };
+
   return (
     <div className="max-w-3xl mx-auto p-6">
       <div className="flex w-full flex-col justify-center items-center rounded-md shadow-md p-2 bg-white">
@@ -39,6 +52,8 @@ const JobPostingForm = () => {
           </label>
           <input
             id="compname"
+            value={companyName}
+            onChange={(event) => setCompanyName(event.target.value)}
             name="header"
             type="text"
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
@@ -56,6 +71,8 @@ const JobPostingForm = () => {
           <input
             id="header"
             name="header"
+            value={jobTitle}
+            onChange={(event) => setJobTitle(event.target.value)}
             type="text"
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
             placeholder="Enter job headline..."
@@ -72,6 +89,8 @@ const JobPostingForm = () => {
           <textarea
             id="body"
             name="body"
+            value={jobDescription}
+            onChange={(event) => setJobDescription(event.target.value)}
             rows="5"
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
             placeholder="Enter job description..."
@@ -119,6 +138,7 @@ const JobPostingForm = () => {
         <button
           type="submit"
           className="bg-sky-500 w-full text-white px-4 py-2 rounded-md hover:bg-sky-600 focus:outline-none focus:ring focus:ring-blue-300"
+          onClick={handleSubmit}
         >
           Submit
         </button>
