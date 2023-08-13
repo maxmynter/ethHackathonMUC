@@ -54,7 +54,7 @@ const Home: NextPage = () => {
               emoji="💁"
               colorOverlay="bg-white/50"
               colorUnderlay="bg-gradient-to-b from-fuchsia-300 to-pink-600"
-              text="Crowdsource the Pre-Selection of High-Potential Job Seekers and Save Days of Work."
+              text="Crowd-source the best matches for each position and save days of work."
               footer="I want to fill a position"
             />
             <HeroBox
@@ -62,16 +62,16 @@ const Home: NextPage = () => {
               colorOverlay="bg-white/50"
               colorUnderlay="bg-gradient-to-b from-blue-300 to-purple-600"
               emoji="🤑"
-              text="Earn flexible Income on your Terms by Successfully Matching Open Positions with Job Seekers"
-              footer="Make Money Now"
+              text="Earn flexible income on your terms by matching open positions with job seekers"
+              footer="Make money now!"
             />
             <HeroBox
               linkTo="/applicant"
               emoji="🧑‍💻"
               colorOverlay="bg-white/50"
               colorUnderlay="bg-gradient-to-b from-green-300 to-green-600"
-              text="Your Perfect Position. In Autopilot. Be matched by a Human - with Skin in the Game"
-              footer="I want a Job"
+              text="Find your perfect position. Be matched by a human with skin in the game"
+              footer="I want a job"
             />
           </div>
         </div>
