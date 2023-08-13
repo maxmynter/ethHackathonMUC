@@ -8,6 +8,7 @@ const ListView = ({
   setSelected,
   data,
   typeOfData,
+  title,
 }: {
   selected: ExpandedJobPosting | Candidate | null;
   setSelected:
@@ -15,10 +16,11 @@ const ListView = ({
     | Dispatch<SetStateAction<Candidate | null>>;
   data: Array<ExpandedJobPosting | Candidate>;
   typeOfData: string;
+  title: string;
 }) => {
   return (
-    <div className="bg-white flex-1 w-full h-full m-3">
-      <h3 className="font-bold text-2xl text-center">Select a job...</h3>
+    <div className="bg-white flex-1 w-full h-full m-3 rounded-md shadow-md p-2">
+      <h3 className="font-bold text-2xl text-center">{title}</h3>
 
       <div className="flex flex-col">
         {data.map((item: ExpandedJobPosting | Candidate) => {

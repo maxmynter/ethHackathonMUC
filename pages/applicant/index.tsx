@@ -6,6 +6,8 @@ import { CreateApplicantProfileWithData } from "../../components/LinkedUp";
 
 const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {
   const [portfolioRows, setPortfolioRows] = useState([{ title: "", link: "" }]);
+  const [jobTitle, setJobTitle] = useState("");
+  const [selfIntro, setSelfIntro] = useState("");
 
   const addRow = () => {
     setPortfolioRows([...portfolioRows, { title: "", link: "" }]);
@@ -29,6 +31,9 @@ const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {
   };
 
   const handleSubmit = () => {
+    setJobTitle("");
+    setSelfIntro("");
+    setPortfolioRows([]);
     onSubmit();
     // Perform your search request logic here
   };
@@ -44,6 +49,8 @@ const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {
         </label>
         <input
           type="text"
+          value={jobTitle}
+          onChange={(event) => setJobTitle(event.target.value)}
           id="jobTitle"
           className="w-full mb-4 p-2 border rounded"
         />
@@ -52,6 +59,8 @@ const ApplicationModal = ({ onSubmit }: { onSubmit: Function }) => {
           Introduce yourself briefly (max.250 words):
         </label>
         <textarea
+          value={selfIntro}
+          onChange={(event) => setSelfIntro(event.target.value)}
           id="description"
           rows={4}
           className="w-full mb-4 p-2 border rounded"
