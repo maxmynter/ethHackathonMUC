@@ -1,6 +1,6 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { HeaderButtonObject } from "../types/global";
+import { HeaderButtonObject } from "../../types/global";
 
 const HeaderButton = ({
   buttonInfo,
