@@ -38,7 +38,7 @@ const JobPostingForm = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <div className="flex w-full flex-col justify-center items-center rounded-md shadow-md p-2 bg-white">
+      <div className="flex w-full flex-col justify-center items-center rounded-md shadow-md p-6 bg-white">
         <h1 className="text-2xl font-semibold mb-4 w-full">
           Create a New Job Posting
         </h1>
@@ -137,10 +137,10 @@ const JobPostingForm = () => {
 
         <button
           type="submit"
-          className="bg-sky-500 w-full text-white px-4 py-2 rounded-md hover:bg-sky-600 focus:outline-none focus:ring focus:ring-blue-300"
+          className="bg-sky-500 w-full text-white font-bold px-4 py-2 rounded-md hover:bg-sky-600 focus:outline-none focus:ring focus:ring-blue-300"
           onClick={handleSubmit}
         >
-          Submit
+          Create Job Posting
         </button>
       </div>
     </div>
