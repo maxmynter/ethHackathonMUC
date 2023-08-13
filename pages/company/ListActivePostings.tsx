@@ -170,8 +170,6 @@ const ActiveJobPostings = () => {
     setJobPostings(mockJobPostings);
   }, []);
 
-  console.log(data);
-
   return (
     <div className="container mx-auto mt-8">
       <div className="flex flex-col justify-center items-center rounded-md shadow-md p-6 bg-white">
