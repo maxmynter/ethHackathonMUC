@@ -28,12 +28,10 @@ const CandidatePost = ({
       >
         <div className="w-full p-3 cursor-pointer" onClick={() => onPress()}>
           <div className="flex flex-col">
-            <h3 className="font-bold">{`${
-              candidate.name ? candidate.name : "Anon"
-            }`}</h3>
+            <h3 className="font-bold">{`${candidate?.name}`}</h3>
             <div className="flex flex-row justify-between">
-              <p>Staked Already: ${candidate.backedAmount} USD</p>
-              <p>Backed by: {candidate.backersCount} People</p>
+              <p>Staked Already: ${candidate?.backedAmount} USD</p>
+              <p>Backed by: {candidate?.backersCount} People</p>
             </div>
           </div>
         </div>

@@ -27,13 +27,13 @@ const JobPost = ({
       >
         <div className="w-full p-3 cursor-pointer" onClick={() => onPress()}>
           <div className="flex flex-col">
-            <h3 className="font-bold">{`${
-              job.title ? job.title : "Open Position"
-            }${job.companyName ? ` --- ${job.companyName}` : ""}`}</h3>
+            <h3 className="font-bold">{`${job?.title}${
+              job?.companyName ? ` --- ${job.companyName}` : ""
+            }`}</h3>
             <div className="flex flex-row justify-between">
-              <p>Bounty: ${job.bountyUSD} USD</p>
-              <p>Staked Already: ${job.backedTokens} USD</p>
-              <p>Backed by: {job.suggestions} People</p>
+              <p>Bounty: ${job?.bountyUSD} USD</p>
+              <p>Staked Already: ${job?.backedTokens} USD</p>
+              <p>Backed by: {job?.suggestions} People</p>
             </div>
           </div>
         </div>
