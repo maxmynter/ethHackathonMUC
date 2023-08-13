@@ -4,8 +4,7 @@ import ActiveJobPostings from "./ListActivePostings";
 import JobPostingForm from "./JobPostingForm";
 import { useState } from "react";
 
-const companyViewStatesArray = ["New", "Active", "Archive"];
-
+const companyViewStatesArray = ["New", "Active"];
 
 const CompanyView = () => {
   const [companyViewState, setCompanyViewState] = useState("Active");
@@ -25,12 +24,11 @@ const CompanyView = () => {
       case "New":
         return (
           <div>
-        <JobPostingForm />
-        </div>);
+            <JobPostingForm />
+          </div>
+        );
       case "Active":
         return <ActiveJobPostings />;
-      case "Archive":
-        return <p>Not yet Implemented</p>;
       default:
         return <p>Company View State Default</p>;
     }
