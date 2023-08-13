@@ -105,31 +105,33 @@ const LinkMatchView = () => {
   };
 
   return (
-    <div className="flex flex-col h-full justify-center items-center">
+    <div className="h-full">
       <div>
         <Header />
       </div>
-      <MatchHeader
-        selectedJob={selectedJob}
-        selectedCandidate={selectedCandidate}
-        onSubmit={onMakeMatch}
-      />
-      <div className="flex-1 flex flex-col">
-        <div className="container mx-auto grid gap-4 grid-cols-2 grid-rows-1 flex-1">
-          <ListView
-            typeOfData="Job"
-            data={mockData.jobPostings}
-            selected={selectedJob}
-            setSelected={setSelectedJob}
-            title="Select a Job... "
-          />
-          <ListView
-            typeOfData="Candidate"
-            data={mockData.candidates}
-            selected={selectedCandidate}
-            setSelected={setSelectedCandidate}
-            title="Select a Candidate... "
-          />
+      <div className="flex flex-col justify-center items-center">
+        <MatchHeader
+          selectedJob={selectedJob}
+          selectedCandidate={selectedCandidate}
+          onSubmit={onMakeMatch}
+        />
+        <div className="flex-1 flex flex-col">
+          <div className="container mx-auto grid gap-4 grid-cols-2 grid-rows-1 flex-1">
+            <ListView
+              typeOfData="Job"
+              data={mockData.jobPostings}
+              selected={selectedJob}
+              setSelected={setSelectedJob}
+              title="Select a Job... "
+            />
+            <ListView
+              typeOfData="Candidate"
+              data={mockData.candidates}
+              selected={selectedCandidate}
+              setSelected={setSelectedCandidate}
+              title="Select a Candidate... "
+            />
+          </div>
         </div>
       </div>
     </div>

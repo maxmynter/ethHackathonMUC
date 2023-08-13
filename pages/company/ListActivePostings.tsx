@@ -172,7 +172,7 @@ const ActiveJobPostings = () => {
 
   return (
     <div className="container mx-auto mt-8">
-      <div className="flex flex-col justify-center items-center rounded-md shadow-md p-4 bg-white">
+      <div className="flex flex-col justify-center items-center rounded-md shadow-md p-6 bg-white">
         <h1 className="text-2xl w-full font-bold mb-4">Open Job Postings</h1>
         <ul className="w-full">
           {jobPostings.map((jobPosting) => (
